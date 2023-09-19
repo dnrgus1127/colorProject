@@ -1,0 +1,251 @@
+@import "reset.css";
+@import "font.css";
+
+
+:root {
+    --test-color : #83D1A8;
+    --test-color2 : #000000;
+
+    --point-color : #27005D;
+    --text-black : #303030;
+    --text-black2 : #414141;
+    --text-white : #d3d3d3;
+    --border-color : #c2c2c2;
+    --warning-color : red;
+
+    --side-padding : 3rem;
+
+    --grid-col : 4;
+
+    --element-color : #ffffff;
+    --current-color : "#121212";
+}
+
+@media screen and (max-width : 1024px) {
+    :root {
+        --grid-col :3;
+    }
+}
+
+@media screen and (max-width : 768px){
+ 
+    :root {
+        --grid-col : 2;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    :root {
+        --grid-col : 1;
+    }
+    
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+body {
+    background-color: var(--current-color);
+}
+
+html,body {
+    width: 100%;
+    height: 100%;
+}
+
+#header {
+    
+    width: 100%;
+    height: 10%;
+    background-color: var(--point-color);
+}
+
+#setting {
+    height: 8vh;
+    display: flex;
+    align-items: center;
+}
+
+body > div {
+    padding : 0 var(--side-padding);
+}
+
+
+#gridBody {
+    padding: var(--side-padding);
+    padding-top: 0;
+    height: 72vh;
+    overflow-y: auto;
+}
+
+.colorItemList {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-col),1fr);
+    grid-template-rows: auto;
+    height : 100%;
+}
+
+.colorItemBox {
+    padding: 2rem;
+    background-color: color-mix(in srgb, var(--test-color) 0%, white);    
+    display: flex;
+    justify-content: space-between;
+}
+
+.colorCode {
+   font-size: 1.6rem;
+   font-weight: 500;
+   text-transform: uppercase;
+}
+
+.clipboardButton {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+.clipboardButton:hover {
+    transform: scale(1.3);
+    transition: all .3s ease-out;
+}
+
+
+/* controller grid */
+#searchAndController {
+    height: 20vh;
+    display:flex;
+    padding : 0 var(--side-padding);
+    align-items: center;
+    justify-content: center;
+}
+
+#searchBar {
+    position: relative;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#searchColor { 
+    width: 100%;
+    height: 100%;
+    font-size: 4.4rem;
+    text-align: center;
+
+    color : var(--element-color);
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: .2rem;
+    border-radius: 4rem;
+    padding: .5rem 3rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    
+}
+
+
+#colorPickerIcon{
+    width: 3.6rem;
+    height: 3.6rem;
+    position:absolute;
+    right: 0;
+    cursor: pointer;
+    fill : var(--element-color);;
+}
+
+
+#colorPicker {
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+}
+
+#rgbBox, #rgbBox > input {
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    color :var(--element-color);
+}
+
+#rgbBox > input {
+    width: 6rem;
+    text-align: center;
+
+}
+
+#colorType {
+    color : var(--element-color);   
+    font-weight: 800;
+    font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    padding : .5rem 1rem;
+    border : 2px solid var(--element-color);
+    border-radius: 4px;
+}
+#colorType:hover {
+   color : var(--current-color);
+   background-color : var(--element-color)
+}
+
+#baseColorInputBox {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#baseColorInputBox > input[type="text"] {
+    color : var(--element-color);
+    font-family: "Roboto" , sans-serif;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 450;
+    outline: none;
+    
+}
+
+@media screen and (max-width: 1024px){
+    #searchColor {
+        font-size: 3.8rem;
+    }
+}
+
+@media screen and (max-width: 768px){
+    #searchBar {
+        width: 70%;
+    }
+    #searchColor {
+        font-size: 2.4rem;
+    }
+    #colorPickerIcon {
+        width:2.4rem;
+        width: 2.4rem;
+    }
+    #rgbBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    #rgbBox > input{
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    #searchBar {
+        width: 80%;
+    }
+    #searchColor {
+        font-size: 1.6rem;
+    }
+
+    
+    
+}
+
