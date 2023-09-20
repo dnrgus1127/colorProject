@@ -1,23 +1,26 @@
 import { SettingObj } from "./classes.js";
-import { DEFAULT_COLOR } from "./constants.js";
+import { COLOR_DATA, DEFAULT_COLOR } from "./constants.js";
 import { checkHexa, checkRgb } from "./regex/validColor.js";
-import { rgbToHex, hexToRgb, getTextColorByLuminance, Color, hexToRgbCode } from "./utils/color.js";
+import { rgbToHex, hexToRgb, getTextColorByLuminance, Color, hexToRgbCode, getColorType } from "./utils/color.js";
 
 
-const colorList = document.getElementById("gridBody");
-const colorItemList = colorList.querySelectorAll(".colorItemBox");
-const colorPicker = document.getElementById("colorPicker");
-const searchColor = document.getElementById("searchColor");
+const $colorList = document.getElementById("gridBody");
+const $colorItemList = $colorList.querySelectorAll(".colorItemBox");
+const $colorPicker = document.getElementById("colorPicker");
+const $searchColor = document.getElementById("searchColor");
+const $searchReulst = document.getElementById("searchResult");
 
 
-export const changeColorItems = (value = DEFAULT_COLOR) => {
+export const changeColorItems = (value = SettingObj.mainColor.hexColor) => {
     SettingObj.mainColor = value;
     const color = SettingObj.mainColor;
 
-    // 비율 가중치(?)
-    const mixedRatio = 100 / (colorItemList.length);
+    updateColorViews();
 
-    colorItemList.forEach((item, idx) => {
+    // 비율 가중치(?)
+    const mixedRatio = 100 / ($colorItemList.length);
+
+    $colorItemList.forEach((item, idx) => {
         let mixedColor = color.colorMix({ ratio: mixedRatio * idx, baseColor: SettingObj.baseColor.hexColor });
 
 
@@ -45,40 +48,82 @@ export const changeColorItems = (value = DEFAULT_COLOR) => {
 
 }
 
-changeColorItems();
 
-colorPicker.addEventListener("input", (e) => {
+// 메인 색상과 베이스 색상을 보여주는 요소들 업데이트 해주는 함수
+export const updateColorViews = () => {
+    let mainColor, baseColor;
+
+
+    // 컬러 타입 추가될 여지가 있음
+    if (SettingObj.colorType === "HEX") {
+        mainColor = SettingObj.mainColor.hexColor;
+        baseColor = SettingObj.baseColor.hexColor;
+    }
+    else if (SettingObj.colorType === "RGB") {
+        mainColor = SettingObj.mainColor.rgbColor;
+        baseColor = SettingObj.baseColor.rgbColor;
+    }
+
+    const $mainColorInput = document.getElementById("searchColor");
+    const $mainColorPicker = document.getElementById("colorPicker");
+    const $baseColorInput = document.getElementById("baseColorInput");
+    const $baseColorPicker = document.getElementById("baseColorPicker");
+
+    $mainColorInput.value = mainColor;
+    $mainColorPicker.value = SettingObj.mainColor.hexColor;
+    $baseColorInput.value = baseColor;
+    $baseColorPicker.value = SettingObj.baseColor.hexColor;
+}
+
+$colorPicker.addEventListener("input", (e) => {
     changeColorItems(e.target.value);
-    searchColor.value = SettingObj.colorType === "HEX" ? e.target.value : hexToRgbCode(e.target.value);
-
 })
 
+$searchColor.addEventListener("focus", (e) => {
+    e.target.setSelectionRange(0, 9999);
+})
 
-searchColor.addEventListener("change", (e) => {
+$searchColor.addEventListener("change", (e) => {
     let color = e.target.value;
 
     if (color.length === 0) {
         changeColorItems(DEFAULT_COLOR);
-        colorPicker.value = DEFAULT_COLOR
+        $colorPicker.value = DEFAULT_COLOR
         return;
     }
+
+
 
     if (!checkRgb(color) && !checkHexa(color)) {
         alert("입력값이 올바르지 않습니다!");
         e.target.value = DEFAULT_COLOR;
-        colorPicker.value = DEFAULT_COLOR;
+        $colorPicker.value = DEFAULT_COLOR;
         return;
     }
 
-    if (checkRgb(color)) {
-        color = rgbToHex(color);
+    SettingObj.colorType = getColorType(color);
 
-    }
-    colorPicker.value = color;
+    changeColorTypeView();
     changeColorItems(color);
 
 })
+$searchColor.addEventListener("input", (e) => {
+    const colorList = Object.keys(COLOR_DATA);
 
+    const searchList = colorList.filter((item) => {
+        if (item.toUpperCase().includes(e.target.value.toUpperCase())) return item;
+    })
+
+
+    $searchReulst.innerHTML = "";
+    searchList.forEach((item) => {
+        const colorItem = document.createElement("div");
+        colorItem.className = "searchColorItem"
+        colorItem.innerHTML = `<div style="background-color : ${COLOR_DATA[item].hex};"></div><p>${item}</p>`
+        $searchReulst.appendChild(colorItem);
+
+    })
+})
 
 
 function setRgbBox(hexColor) {
