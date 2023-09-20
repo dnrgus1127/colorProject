@@ -1,11 +1,13 @@
 import { SettingObj } from "./classes.js";
 import { changeColorItems, changeColorTypeView } from "./colors.js";
-import { DEFAULT_BASECOLOR, DEFAULT_COLOR } from "./constants.js";
+import { COLOR_DATA, DEFAULT_BASECOLOR, DEFAULT_COLOR } from "./constants.js";
 import { checkColorCode } from "./regex/validColor.js";
 import { convertColorByType } from "./setting/setting.js";
 import { getComplementaryColor } from "./utils/color.js";
 import { copyToClipboard } from "./utils/copyToClipboard.js";
 
+
+changeColorItems();
 
 const clipboardButtonList = document.querySelectorAll(".clipboardButton");
 
@@ -69,10 +71,19 @@ baseColorPicker.addEventListener("input", (e) => {
 
 // 보색 적용
 
-const lumi = document.getElementById("lumi");
-lumi.addEventListener("click", () => {
+const $complementaryBox = document.getElementById("complementaryBox");
+$complementaryBox.addEventListener("click", () => {
     changeColorItems(getComplementaryColor(SettingObj.mainColor.hexColor));
 })
 
+
+
+// Base, Main 컬러 상호 교체
+
+const $changeColorButton = document.getElementById("changeColorButton");
+$changeColorButton.addEventListener("click", () => {
+    SettingObj.exchangeColors();
+    changeColorItems();
+})
 
 
