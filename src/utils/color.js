@@ -10,6 +10,7 @@ export class Color {
             this.r = r;
             this.g = g;
             this.b = b;
+            this.rgbColor = `rgb(${r},${g},${b})`;
         }
         else if (checkRgb(color)) {
             this.hexColor = rgbToHex(color);
@@ -17,6 +18,7 @@ export class Color {
             this.r = r;
             this.g = g;
             this.b = b;
+            this.rgbColor = color;
         }
     }
 
@@ -33,6 +35,17 @@ export class Color {
 
 }
 
+
+const getColorType = (color) => {
+    if (checkHexa(color)) {
+        return "HEX";
+    }
+    else if (checkRgb(color)) {
+        return "RGB"
+    }
+    return null;
+
+}
 
 
 
@@ -128,5 +141,5 @@ function getTextColorByLuminance(hexColor) {
 
 
 
-export { rgbToHex, hexToRgb, hexToRgbCode, colorMix, decimalToHex, getComplementaryColor, calculateRelativeLuminance, getTextColorByLuminance };
+export { rgbToHex, getColorType, hexToRgb, hexToRgbCode, colorMix, decimalToHex, getComplementaryColor, calculateRelativeLuminance, getTextColorByLuminance };
 
