@@ -4,7 +4,7 @@ import { Color, hexToRgbCode, rgbToHex } from "../utils/color.js";
 
 export class Setting {
     constructor(colorType, mainColor = DEFAULT_COLOR, baseColor = DEFAULT_BASECOLOR) {
-        this.colorType = colorType;
+        this._colorType = colorType;
         this._baseColor = new Color(baseColor);
         this._mainColor = new Color(mainColor);
     }
@@ -12,6 +12,22 @@ export class Setting {
     onToggleColorType() {
         this.colorType = this.colorType === "HEX" ? "RGB" : "HEX";
 
+    }
+
+    exchangeColors() {
+        let tmp = this.mainColor;
+        this._mainColor = this._baseColor;
+        this._baseColor = tmp;
+    }
+
+    get colorType() {
+        return this._colorType;
+    }
+    set colorType(type) {
+        if (type !== "HEX" && type !== "RGB") {
+            this._colorType = "HEX";
+        }
+        this._colorType = type;
     }
 
     get baseColor() {
