@@ -1,14 +1,14 @@
 import { SettingObj } from "./classes.js";
-import { COLOR_DATA, DEFAULT_COLOR } from "./constants.js";
 import { checkHexa, checkRgb } from "./regex/validColor.js";
-import { rgbToHex, hexToRgb, getTextColorByLuminance, Color, hexToRgbCode, getColorType } from "./utils/color.js";
+import { COLOR_DATA, getRegularColor } from "./regularColor.js";
+import { rgbToHex, hexToRgb, getTextColorByLuminance, hexToRgbCode, getColorType } from "./utils/color.js";
 
 
 const $colorList = document.getElementById("gridBody");
 const $colorItemList = $colorList.querySelectorAll(".colorItemBox");
 const $colorPicker = document.getElementById("colorPicker");
 const $searchColor = document.getElementById("searchColor");
-const $searchReulst = document.getElementById("searchResult");
+const $searchResult = document.getElementById("searchResult");
 
 
 export const changeColorItems = (value = SettingObj.mainColor.hexColor) => {
@@ -83,31 +83,47 @@ $searchColor.addEventListener("focus", (e) => {
     e.target.setSelectionRange(0, 9999);
 })
 
+
+// 색상 검색
 $searchColor.addEventListener("change", (e) => {
+
     let color = e.target.value;
 
+
+    // 빈칸 검사
     if (color.length === 0) {
-        changeColorItems(DEFAULT_COLOR);
-        $colorPicker.value = DEFAULT_COLOR
+        $searchColor.value = $colorPicker.value;
+        blurInputCss();
+
         return;
     }
 
-
-
-    if (!checkRgb(color) && !checkHexa(color)) {
-        alert("입력값이 올바르지 않습니다!");
-        e.target.value = DEFAULT_COLOR;
-        $colorPicker.value = DEFAULT_COLOR;
-        return;
+    // 정규 색상 검사 ex) white , blue, grey, green, lightgrey
+    const regularColor = getRegularColor(color);
+    if (regularColor) {
+        color = regularColor.hexColor;
     }
 
-    SettingObj.colorType = getColorType(color);
+    // #ffffff, rgb 형식 검사
+    if (!checkRgb(color) && !checkHexa(color)) return;
+
+
+    $searchColor.blur();
+
+
+    if (!regularColor) SettingObj.colorType = getColorType(color);
 
     changeColorTypeView();
     changeColorItems(color);
+    blurInputCss();
+
 
 })
+
+
+// 연관 검색 색상 목록 추가
 $searchColor.addEventListener("input", (e) => {
+
     const colorList = Object.keys(COLOR_DATA);
 
     const searchList = colorList.filter((item) => {
@@ -115,15 +131,53 @@ $searchColor.addEventListener("input", (e) => {
     })
 
 
-    $searchReulst.innerHTML = "";
+    $searchResult.innerHTML = "";
     searchList.forEach((item) => {
         const colorItem = document.createElement("div");
         colorItem.className = "searchColorItem"
         colorItem.innerHTML = `<div style="background-color : ${COLOR_DATA[item].hex};"></div><p>${item}</p>`
-        $searchReulst.appendChild(colorItem);
+        colorItem.addEventListener("click", () => {
+            $searchColor.value = item;
+            const changeEvent = new Event("change", {
+                bubbles: true,
+                cancelable: true,
+            })
+            $searchColor.dispatchEvent(changeEvent);
+        })
+
+        $searchResult.appendChild(colorItem);
 
     })
 })
+
+$searchColor.addEventListener("focus", () => {
+    focusInputCss();
+})
+
+
+document.addEventListener("mousedown", (e) => {
+    const $searchBar = document.getElementById("searchBar");
+
+    const clickElement = e.target;
+    if (!$searchBar.contains(clickElement)) {
+        blurInputCss();
+    }
+})
+
+
+function focusInputCss() {
+    $searchResult.style.display = "block"
+    $searchColor.style.backgroundColor = "var(--element-color)"
+    $searchColor.style.color = "var(--current-color)"
+}
+function blurInputCss() {
+    $searchResult.style.display = "none";
+    $searchColor.style.backgroundColor = "initial"
+    $searchColor.style.color = "var(--element-color)"
+}
+
+
+
 
 
 function setRgbBox(hexColor) {

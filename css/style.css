@@ -148,7 +148,6 @@ body > div {
     text-transform: uppercase;    
 }
 #searchColor:focus {
-    background-color: var(--element-color);
     color : var(--current-color);
     z-index: 4;
     border-end-start-radius: 0;
@@ -160,14 +159,12 @@ body > div {
     top: 0;
     left: 0;
     display: none;
-}
-
-#searchColor:focus ~ #searchResult {
     width: 100%;
     top: 100%;
     background-color: var(--element-color);
-    display: block;
 }
+
+
 
 .searchColorItem {
     padding: 1rem;

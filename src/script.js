@@ -1,6 +1,6 @@
 import { SettingObj } from "./classes.js";
 import { changeColorItems, changeColorTypeView } from "./colors.js";
-import { COLOR_DATA, DEFAULT_BASECOLOR, DEFAULT_COLOR } from "./constants.js";
+import { DEFAULT_BASECOLOR } from "./constants.js";
 import { checkColorCode } from "./regex/validColor.js";
 import { convertColorByType } from "./setting/setting.js";
 import { getComplementaryColor } from "./utils/color.js";
