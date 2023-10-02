@@ -1,4 +1,4 @@
-import { Color } from "./utils/color.js";
+import { Color } from "../constructor/Color.js";
 
 
 export const COLOR_DATA = {

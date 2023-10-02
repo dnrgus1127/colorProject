@@ -8,8 +8,8 @@ const checkHexa = (value) => {
     return hexaRgex.test(value);
 }
 
-const checkColorCode = (value) => {
+const validateColorCode = (value) => {
     return checkRgb(value) || checkHexa(value);
 }
 
-export { checkRgb, checkHexa, checkColorCode }
+export { checkRgb, checkHexa, validateColorCode }
