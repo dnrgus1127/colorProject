@@ -66,7 +66,7 @@ html,body {
     background-color: var(--point-color);
 }
 
-#setting {
+#colorToolBox {
     height: 8vh;
     display: flex;
     align-items: center;
@@ -77,7 +77,7 @@ body > div {
 }
 
 
-#gridBody {
+#colorPalette {
     padding: var(--side-padding);
     padding-top: 0;
     height: 72vh;
@@ -87,7 +87,7 @@ body > div {
 .colorItemList {
     display: grid;
     grid-template-columns: repeat(var(--grid-col),1fr);
-    grid-template-rows: auto;
+    grid-auto-rows: 1fr;
     height : 100%;
 }
 
@@ -96,12 +96,15 @@ body > div {
     background-color: color-mix(in srgb, var(--test-color) 0%, white);    
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
+}
+.colorItemBox:hover {
+    border : 3px solid var(--element-color);
 }
 
 .colorCode {
    font-size: 1.6rem;
    font-weight: 500;
-   text-transform: uppercase;
 }
 
 .clipboardButton {
@@ -115,7 +118,7 @@ body > div {
 
 
 /* controller grid */
-#searchAndController {
+#searchWrapper {
     height: 20vh;
     display:flex;
     padding : 0 var(--side-padding);
@@ -123,7 +126,7 @@ body > div {
     justify-content: center;
 }
 
-#searchBar {
+#searchSelectionContainer {
     position: relative;
     width: 60%;
     display: flex;
@@ -131,7 +134,7 @@ body > div {
     justify-content: center;
 
 }
-#searchColor { 
+#searchColorInput { 
     width: 100%;
     height: 100%;
     font-size: 4.4rem;
@@ -145,9 +148,8 @@ body > div {
     padding: .5rem 3rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    text-transform: uppercase;    
 }
-#searchColor:focus {
+#searchColorInput:focus {
     color : var(--current-color);
     z-index: 4;
     border-end-start-radius: 0;
@@ -162,13 +164,13 @@ body > div {
     width: 100%;
     top: 100%;
     background-color: var(--element-color);
+    color : var(--current-color);
 }
 
 
 
-.searchColorItem {
+.searchColorInputItem {
     padding: 1rem;
-    color : var(--current-color);
     font-size: 1.4rem;
     font-family: "Roboto", sans-serif;
     font-weight: 800;
@@ -177,18 +179,24 @@ body > div {
     gap: 1rem;
     align-items: center;
 }
+.searchColorInputItem.selected {
+    
+    background-color: var(--current-color);
+}
+.searchColorInputItem.selected p {
+    color : var(--element-color);
+}
 
-.searchColorItem > div {
+.searchColorInputItem > div {
     width: 2rem;
     height: 2rem;
     border-radius: 4px;
 }
-.searchColorItem > p {
-    flex :1;
-    opacity: 0.7;
+.searchColorInputItem > p {
+    flex :1;    
 }
 
-.searchColorItem:hover > p {
+.searchColorInputItem:hover > p {
     opacity: 1;
 }
 
@@ -250,14 +258,23 @@ body > div {
     outline: none;
     
 }
-#complementaryBox {
+
+.topButton {
     position: fixed;
-    top: var(--side-padding);
+    padding : var(--side-padding);
+}
+.topButton  svg {
+    fill: var(--element-color);
+}
+#complementaryButton {
     right: 0;
+    
+    
 }
-#complementaryBox svg {
-    fill : var(--element-color)
+#randomColorButton{
+    left : 0; 
 }
+
 
 #changeColorButton { 
     display: block;
@@ -270,16 +287,16 @@ body > div {
 }
 
 @media screen and (max-width: 1024px){
-    #searchColor {
+    #searchColorInput {
         font-size: 3.8rem;
     }
 }
 
 @media screen and (max-width: 768px){
-    #searchBar {
+    #searchSelectionContainer {
         width: 70%;
     }
-    #searchColor {
+    #searchColorInput {
         font-size: 2.4rem;
     }
     #colorPickerIcon {
@@ -297,10 +314,10 @@ body > div {
 }
 
 @media screen and (max-width: 480px){
-    #searchBar {
+    #searchSelectionContainer {
         width: 80%;
     }
-    #searchColor {
+    #searchColorInput {
         font-size: 1.6rem;
     }
 }
