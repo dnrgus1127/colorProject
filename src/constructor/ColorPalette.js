@@ -1,5 +1,4 @@
 import { COLOR_TYPE, COLOR_TYPE_HEX, DEFAULT_BASE_COLOR, DEFAULT_COLOR } from "../constants.js";
-import { validateColorCode } from "../utils/regex/validColor.js";
 import { Color } from "./Color.js";
 
 /*
@@ -10,7 +9,8 @@ import { Color } from "./Color.js";
 */
 
 
-function ColorPalette() {
+function ColorPalette(name = "title") {
+    this.title = name;
     this._colorType = COLOR_TYPE_HEX;
     this._mainColor = new Color(DEFAULT_COLOR);
     this._baseColor = new Color(DEFAULT_BASE_COLOR);

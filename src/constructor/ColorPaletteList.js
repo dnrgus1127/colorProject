@@ -34,3 +34,20 @@ ColorPaletteList.prototype.setIndex = function (idx) {
     }
     this._currentIdx = idx;
 }
+
+
+ColorPaletteList.prototype.refreshPaletteList = function () {
+    const $paletteList = document.getElementById("paletteList");
+    const paletteArr = this._colorPaletteArr;
+
+    $paletteList.innerHTML = "";
+
+    paletteArr.forEach(palette => {
+        const newPalette = document.createElement("div");
+        newPalette.className = "palette";
+        newPalette.innerText = palette.title;
+        newPalette.style.backgroundImage = `linear-gradient(to left, ${palette.getMainColor().getColorByType()}, ${palette.getBaseColor().getColorByType()})`
+
+        $paletteList.appendChild(newPalette);
+    });
+}
