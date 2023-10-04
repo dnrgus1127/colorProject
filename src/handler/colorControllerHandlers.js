@@ -1,33 +1,32 @@
 import { COLOR_TYPE_HEX, DEFAULT_BASE_COLOR } from "../constants.js";
 import { Color } from "../constructor/Color.js";
+import { colorPaletteList } from "../script.js";
 import { checkHexa, checkRgb, validateColorCode } from "../utils/regex/validColor.js";
 import { COLOR_DATA, getRegularColor } from "../utils/regularColor.js";
-import { updatePaletteColor } from "../view/updatePaletteView.js";
 
-export function colorControllerHandlers(currentPalette) {
+export function colorControllerHandlers() {
 
-    addColorSearchHandlers(currentPalette);
-    addColorToolBoxHandlers(currentPalette);
+    addColorSearchHandlers();
+    addColorToolBoxHandlers();
 }
 
-function addColorSearchHandlers(currentPalette) {
+function addColorSearchHandlers() {
     const $colorPicker = document.getElementById("colorPicker");
     const $searchColorInput = document.getElementById("searchColorInput");
     const $searchResult = document.getElementById("searchResult");
 
-
-    const { mainColor, baseColor, colorType } = currentPalette.getProperties();
-
-
     $colorPicker.addEventListener("input", (e) => {
         const pickedColor = new Color(e.target.value);
-        currentPalette.setMainColor(pickedColor)
-        updatePaletteColor();
+        colorPaletteList.getCurrentPalette().setMainColor(pickedColor);
+        colorPaletteList.rePaintPalette();
     })
 
     $searchColorInput.addEventListener("change", (e) => {
-
         let inputText = e.target.value;
+
+        const currentPalette = colorPaletteList.getCurrentPalette();
+        const { mainColor, colorType } = currentPalette.getProperties();
+
 
         if (inputText.length === 0) {
             $searchColorInput.value = mainColor.getColorByType(colorType);
@@ -55,8 +54,7 @@ function addColorSearchHandlers(currentPalette) {
         changeColorTypeView(currentPalette.getColorByType());
 
         currentPalette.setMainColor(new Color(inputText));
-        updatePaletteColor();
-        blurInputCss();
+        colorPaletteList.rePaintPalette(); blurInputCss();
         $searchResult.innerHTML = ""
 
 
@@ -95,42 +93,42 @@ function addColorSearchHandlers(currentPalette) {
         })
     })
 
-    {
-        let searchIdx = -1;
 
-        $searchColorInput.addEventListener("keydown", (e) => {
-            if (e.key !== "ArrowDown" && e.key !== "ArrowUp") {
-                searchIdx = -1;
-                $searchResult.innerHTML = ""
-                return;
+    let searchIdx = -1;
+
+    $searchColorInput.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowDown" && e.key !== "ArrowUp") {
+            searchIdx = -1;
+            $searchResult.innerHTML = ""
+            return;
+        }
+
+        const searchColorInputItemList = $searchResult.querySelectorAll(".searchColorInputItem");
+
+        if (e.key === "ArrowDown") {
+
+            if (searchIdx < searchColorInputItemList.length - 1) {
+                searchIdx++;
             }
 
-            const searchColorInputItemList = $searchResult.querySelectorAll(".searchColorInputItem");
+        }
+        if (e.key === "ArrowUp") {
+            e.preventDefault();
+            if (searchIdx >= 0) {
 
-            if (e.key === "ArrowDown") {
-
-                if (searchIdx < searchColorInputItemList.length - 1) {
-                    searchIdx++;
-                }
-
+                searchIdx--;
             }
-            if (e.key === "ArrowUp") {
-                e.preventDefault();
-                if (searchIdx >= 0) {
+        }
 
-                    searchIdx--;
-                }
-            }
-
-            $searchColorInput.value = searchColorInputItemList[searchIdx] ? searchColorInputItemList[searchIdx].querySelector("p").innerText : $searchColorInput.value;
+        $searchColorInput.value = searchColorInputItemList[searchIdx] ? searchColorInputItemList[searchIdx].querySelector("p").innerText : $searchColorInput.value;
 
 
-            searchColorInputItemList[searchIdx - 1] && searchColorInputItemList[searchIdx - 1].classList.remove("selected");
-            searchColorInputItemList[searchIdx] && searchColorInputItemList[searchIdx].classList.add("selected");
-            searchColorInputItemList[searchIdx + 1] && searchColorInputItemList[searchIdx + 1].classList.remove("selected");
+        searchColorInputItemList[searchIdx - 1] && searchColorInputItemList[searchIdx - 1].classList.remove("selected");
+        searchColorInputItemList[searchIdx] && searchColorInputItemList[searchIdx].classList.add("selected");
+        searchColorInputItemList[searchIdx + 1] && searchColorInputItemList[searchIdx + 1].classList.remove("selected");
 
-        })
-    }
+    })
+
 
     $searchColorInput.addEventListener("focus", () => {
         focusInputCss();
@@ -166,7 +164,7 @@ function addColorSearchHandlers(currentPalette) {
 }
 
 
-function addColorToolBoxHandlers(currentPalette) {
+function addColorToolBoxHandlers() {
     const $baseColorInput = document.getElementById("baseColorInput");
     $baseColorInput.value = DEFAULT_BASE_COLOR;
     const $baseColorPicker = document.getElementById("baseColorPicker");
@@ -178,16 +176,16 @@ function addColorToolBoxHandlers(currentPalette) {
     // Base, Main 컬러 상호 교체
 
     $changeColorButton.addEventListener("click", () => {
-        currentPalette.colorExchange();
-        updatePaletteColor();
+        colorPaletteList.getCurrentPalette().colorExchange();
+        colorPaletteList.rePaintPalette();
     })
 
 
     $baseColorPicker.addEventListener("input", (e) => {
         const color = new Color(e.target.value);
         $baseColorInput.value = color.getColorByType(COLOR_TYPE_HEX);
-        currentPalette.setBaseColor(color);
-        updatePaletteColor();
+        colorPaletteList.getCurrentPalette().setBaseColor(color);
+        colorPaletteList.rePaintPalette();
 
     })
     $baseColorInput.addEventListener("change", (e) => {
@@ -200,14 +198,16 @@ function addColorToolBoxHandlers(currentPalette) {
         const color = new Color(e.target.value);
 
         $baseColorPicker.value = color.getColorByType(COLOR_TYPE_HEX);
-        currentPalette.setBaseColor(color);
-        updatePaletteColor();
+        colorPaletteList.getCurrentPalette().setBaseColor(color);
+        colorPaletteList.rePaintPalette();
 
     })
 
 
     const $colorType = document.getElementById("colorType");
     $colorType.addEventListener("click", () => {
+        const currentPalette = colorPaletteList.getCurrentPalette();
+
         $colorType.innerText = currentPalette.getColorByType();
         currentPalette.setColorType($colorType.innerText === "HEX" ? "RGB" : "HEX");
 
