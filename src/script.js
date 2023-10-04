@@ -4,7 +4,6 @@ import { topButtonsHandlers } from "./handler/buttons/topButtonsHandlers.js";
 import { colorControllerHandlers } from "./handler/colorControllerHandlers.js";
 import { addPaletteHandlers } from "./handler/colorPaletteHandlers.js";
 import { addPaletteContainerHandler } from "./handler/paletteContainerHandler.js";
-import { updatePaletteColor } from "./view/updatePaletteView.js";
 
 
 
@@ -13,17 +12,16 @@ export const colorPaletteList = new ColorPaletteList();
 colorPaletteList.addColorPalette(new ColorPalette("과일"));
 colorPaletteList.addColorPalette(new ColorPalette("다크모드"));
 colorPaletteList.refreshPaletteList();
-const currentPalette = colorPaletteList.getCurrentPalette();
 
 addPaletteHandlers();
-colorControllerHandlers(colorPaletteList.getCurrentPalette());
+colorControllerHandlers();
 
-topButtonsHandlers(currentPalette);
+topButtonsHandlers();
 
-updatePaletteColor();
+colorPaletteList.rePaintPalette();
 
 // 팔레트리스트 컨테이너
-addPaletteContainerHandler(colorPaletteList);
+addPaletteContainerHandler();
 
 
 
