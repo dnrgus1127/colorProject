@@ -1,4 +1,7 @@
-export function addPaletteContainerHandler(colorPaletteList) {
+import { ColorPalette } from "../constructor/ColorPalette.js";
+import { colorPaletteList } from "../script.js";
+
+export function addPaletteContainerHandler() {
     const $toggleButton = document.getElementById("paletteListToggleButton");
     const $paletteListContainer = document.getElementById("paletteListConatiner")
     const $paletteList = document.getElementById("paletteList");
@@ -11,7 +14,7 @@ export function addPaletteContainerHandler(colorPaletteList) {
     $toggleButton.addEventListener("click", () => {
 
         if (isToggle) {
-            $paletteListContainer.style.transform = `translateY(-100%)`;
+            $paletteListContainer.style.transform = `translateY(100%)`;
         }
         else {
             colorPaletteList.refreshPaletteList();
@@ -19,6 +22,27 @@ export function addPaletteContainerHandler(colorPaletteList) {
         }
         isToggle = !isToggle
     });
+
+
+    $paletteList.addEventListener("click", (e) => {
+        // 이벤트 위임
+        const clickElement = e.target;
+        if (clickElement === $paletteList) return;
+
+
+        let $palette = clickElement.closest(".palette");
+        if ($palette) {
+            colorPaletteList.setIndex($palette.value);
+
+        }
+
+        // 새 팔레트 클릭시 
+        if (clickElement.closest(".newPalette")) {
+            const newPalette = new ColorPalette();
+            colorPaletteList.addColorPalette(newPalette);
+        }
+
+    })
 
 
     // 팔레트 리스트 컨테이너 밖 클릭 시 컨테이너 닫음
@@ -34,7 +58,50 @@ export function addPaletteContainerHandler(colorPaletteList) {
     })
 
 
+    const $paletteListButtons = document.getElementById("paletteListButtons");
 
 
+
+
+
+    const $paletteTitle = document.getElementById("paletteTitle")
+    $paletteListButtons.addEventListener("click", (e) => {
+        let clickElement = e.target.closest(".paletteIndexButton");
+
+        if (!clickElement) return;
+
+        clearTimeout(showPaletteTimer);
+
+        if (clickElement.id === "prevPaletteButton") {
+            colorPaletteList.prevIndex();
+        }
+        if (clickElement.id === "nextPaletteButton") {
+            colorPaletteList.nextIndex();
+        }
+        $paletteTitle.innerText = colorPaletteList.getCurrentPalette().title;
+        $paletteTitle.style.visibility = "visible";
+
+
+        showPaletteTimer = setTimeout(() => {
+            $paletteListContainer.style.transform = 'translateY(100%)';
+
+        }, 1500);
+
+        $paletteListContainer.style.transform = 'translateY(0)';
+
+
+    })
+
+    $paletteTitle.addEventListener("transitionend", (e) => {
+        $paletteTitle.style.visibility = "hidden";
+    })
+
+
+
+    var showPaletteTimer = setTimeout(() => {
+        $paletteListContainer.style.transform = 'translateY(100%)';
+    }, 1500);
 }
+
+
 
