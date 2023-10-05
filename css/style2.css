@@ -5,7 +5,7 @@
     left: 0;
     width: 100%;
     transform: translateY(100%);
-    background-color: #00000088;
+    background-color: #00000044;
     transition: all .3s ease-in-out;
 }
 
@@ -24,6 +24,24 @@
     cursor: pointer;
     position: relative;
     ;
+}
+
+@keyframes newPaletteAnimation {
+    0% {
+        transform: rotate(-20deg);
+    }
+    33% {
+        transform: rotate(10deg);
+    }
+    66% {
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(0);
+    }
+}
+.palette.selected {
+    animation: newPaletteAnimation .5s;
 }
 
 .palette .mainColor {
@@ -111,15 +129,15 @@
 }
 
 
-
 #paletteTitle {
     position: fixed;
     display: inline-block;
     top: 50vh;
     left: 50vw;
-    transition: all .5s ease-in-out;
-    visibility: hidden;
-    z-index: 999;
-    color : red;
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
+    z-index: -3;
+    color : white;
+    text-shadow: 0px 0px 15px #121212;
     font-size: 4.8rem;
 }

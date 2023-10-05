@@ -32,7 +32,9 @@ export function addPaletteContainerHandler() {
 
         let $palette = clickElement.closest(".palette");
         if ($palette) {
+            showPaletteTitle();
             colorPaletteList.setIndex($palette.value);
+
 
         }
 
@@ -78,8 +80,7 @@ export function addPaletteContainerHandler() {
         if (clickElement.id === "nextPaletteButton") {
             colorPaletteList.nextIndex();
         }
-        $paletteTitle.innerText = colorPaletteList.getCurrentPalette().title;
-        $paletteTitle.style.visibility = "visible";
+        showPaletteTitle();
 
 
         showPaletteTimer = setTimeout(() => {
@@ -92,15 +93,42 @@ export function addPaletteContainerHandler() {
 
     })
 
-    $paletteTitle.addEventListener("transitionend", (e) => {
-        $paletteTitle.style.visibility = "hidden";
-    })
-
-
 
     var showPaletteTimer = setTimeout(() => {
         $paletteListContainer.style.transform = 'translateY(100%)';
     }, 1500);
+
+
+    $paletteListContainer.addEventListener("mousedown", (e) => {
+        if (e.target.closest("button") !== $toggleButton && !isToggle) {
+            isToggle = !isToggle;
+        }
+
+        clearTimeout(showPaletteTimer)
+    })
+
+
+    function showPaletteTitle() {
+        $paletteTitle.innerText = colorPaletteList.getCurrentPalette().title;
+
+        $paletteTitle.style.left = `calc(50vw - ${$paletteTitle.clientWidth / 2}px)`;
+        $paletteTitle.style.top = `calc(50vh - ${$paletteTitle.clientHeight / 2}px)`;
+        $paletteTitle.style.zIndex = 1;
+        $paletteTitle.style.opacity = 1;
+    }
+    // 자동으로 팔레트 타이틀 지워주는 이벤트
+    $paletteTitle.addEventListener("transitionend", (e) => {
+
+        $paletteTitle.style.opacity = 0;
+        if (e.propertyName === "opacity" && getComputedStyle($paletteTitle).opacity === 0) {
+            console.log(1);
+            $paletteTitle.style.zIndex = -3;
+
+        }
+    })
+
+
+
 }
 
 
