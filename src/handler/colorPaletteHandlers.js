@@ -1,24 +1,34 @@
+import { Color } from "../constructor/Color.js";
 import { copyToClipboard } from "../utils/copyToClipboard.js";
 
 export function addPaletteHandlers() {
     const $colorPalette = document.getElementById("colorPalette");
 
-    addClipboardButtonHandler($colorPalette);
 
+    //이벤트 위임
     $colorPalette.addEventListener("click", (e) => {
-        if (e.target.className === "colorItemBox") {
-            console.log("기능 추가 전");
+
+        let button = e.target.closest("button");
+        if (button && button.classList.contains("clipboardButton")) {
+            // 복사 버튼 누르면
+            copyToClipboard(button.closest(".colorItemBox").querySelector(".colorCode").innerText);
         }
     })
-}
 
-function addClipboardButtonHandler($colorPalette) {
-    const $clipboardButtonList = $colorPalette.querySelectorAll(".clipboardButton");
+    const $colorItemBoxList = document.querySelectorAll(".colorItemBox");
 
-    $clipboardButtonList.forEach((button) => {
-        button.addEventListener("click", () => {
-            copyToClipboard(button.value);
+    $colorItemBoxList.forEach(item => {
+        const colorCode = item.querySelector(".colorCode");
+        item.addEventListener("mouseover", (e) => {
+            colorCode.style.color = `white`
+        })
+        item.addEventListener("mouseout", (e) => {
+            let textColor = new Color(colorCode.innerText);
+            colorCode.style.color = textColor.getTextColor().hexColor;
         })
     })
+
 }
+
+
 

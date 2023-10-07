@@ -95,25 +95,72 @@ body > div {
     padding: 2rem;
     background-color: color-mix(in srgb, var(--test-color) 0%, white);    
     display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-}
-.colorItemBox:hover {
-    border : 3px solid var(--element-color);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 3rem;
+
 }
 
 .colorCode {
-   font-size: 1.6rem;
-   font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+ }
+ 
+.colorItemBox:hover .colorCode{
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--element-color);
+
+}
+.colorItemBox:hover .colorItemButtonBox{
+    display: flex;
+    justify-content: center;
+    gap: 3.2rem;
+}
+.overlay-colorItemBox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+}
+.colorItemBox:hover .overlay-colorItemBox {
+    background-color: #000000;
+    opacity: .4;
+    
 }
 
-.clipboardButton {
+.colorCode, .clipboardButton, .exChangeButton{
+    z-index: 2;
+    
+}
+.colorItemBox .colorItemButtonBox {
+    display: none;
+}
+
+
+.colorItemBox:hover .colorItemButtonBox{
+    display: flex;
+
+}
+
+.clipboardButton , .exChangeButton {
     width: 2.4rem;
     height: 2.4rem;
 }
-.clipboardButton:hover {
+
+.clipboardButton:hover ,.exChangeButton:hover{
     transform: scale(1.3);
     transition: all .3s ease-out;
+}
+
+.colorItemButtonBox svg {
+    fill: white;
 }
 
 

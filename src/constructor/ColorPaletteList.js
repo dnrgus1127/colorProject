@@ -122,7 +122,7 @@ ColorPaletteList.prototype.rePaintPalette = function () {
 
         const clipboardButton = item.querySelector(".clipboardButton");
         clipboardButton.value = mixedHexColor;
-        clipboardButton.querySelector("svg").style.fill = textColor;
+
 
     })
 
