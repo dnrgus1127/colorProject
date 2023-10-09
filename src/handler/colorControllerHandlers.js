@@ -48,10 +48,9 @@ function addColorSearchHandlers() {
 
         $searchColorInput.blur();
 
+        if (!regularColor) currentPalette.setColorType(Color.getColorType(inputText));
 
-        if (!regularColor) currentPalette.setColorType = Color.getColorType(inputText);
-
-        changeColorTypeView(currentPalette.getColorByType());
+        changeColorTypeView(currentPalette.getColorType());
 
         currentPalette.setMainColor(new Color(inputText));
         colorPaletteList.rePaintPalette(); blurInputCss();
@@ -208,10 +207,10 @@ function addColorToolBoxHandlers() {
     $colorType.addEventListener("click", () => {
         const currentPalette = colorPaletteList.getCurrentPalette();
 
-        $colorType.innerText = currentPalette.getColorByType();
+        $colorType.innerText = currentPalette.getColorType();
         currentPalette.setColorType($colorType.innerText === "HEX" ? "RGB" : "HEX");
 
-        changeColorTypeView(currentPalette.getColorByType());
+        changeColorTypeView(currentPalette.getColorType());
     })
 
     const $colorPickerIcon = document.getElementById("colorPickerIcon");

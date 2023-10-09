@@ -1,5 +1,6 @@
 import { ColorPalette } from "../constructor/ColorPalette.js";
 import { colorPaletteList } from "../script.js";
+import { customCreateElement } from "../utils/customCreateElement.js";
 
 export function addPaletteContainerHandler() {
     const $toggleButton = document.getElementById("paletteListToggleButton");
@@ -7,8 +8,6 @@ export function addPaletteContainerHandler() {
     const $paletteList = document.getElementById("paletteList");
 
     let isToggle = false;
-
-
 
     // 핸들러로 전달된 화살표 함수가 클로저로서 동작
     $toggleButton.addEventListener("click", () => {
@@ -126,6 +125,41 @@ export function addPaletteContainerHandler() {
 
         }
     })
+
+
+
+
+    const $titleInput = document.getElementById("newPaletteTitleInput");
+    const $newPaletteAddButton = document.getElementById("newPaletteAddButton");
+    const $newPaletteContainer = document.getElementById("newPaletteContainer");
+    $paletteListContainer.addEventListener("click", (e) => {
+        const clickElement = e.target;
+
+
+        if (clickElement.closest(".newPalette")) {
+
+            $newPaletteContainer.style.display = "flex";
+            $titleInput.focus();
+
+        }
+
+
+    })
+    $titleInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            $newPaletteAddButton.click();
+
+
+        }
+    })
+
+
+    $newPaletteAddButton.addEventListener("click", (e) => {
+        colorPaletteList.getCurrentPalette().title = $titleInput.value;
+        $newPaletteContainer.style.display = "none";
+
+    })
+
 
 
 

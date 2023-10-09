@@ -28,7 +28,7 @@ ColorPalette.prototype.getProperties = function () {
     }
 }
 
-ColorPalette.prototype.getColorByType = function () {
+ColorPalette.prototype.getColorType = function () {
     return this._colorType;
 }
 
@@ -63,6 +63,8 @@ ColorPalette.prototype.colorExchange = function () {
     this._baseColor = this._mainColor;
     this._mainColor = tmp;
 }
+
+
 
 /*
     클래스에 비해서 코드의 가독성이나 코드 작성 시의 편리함이 많이 줄어든 느낌을 받았다.

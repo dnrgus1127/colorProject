@@ -68,7 +68,7 @@ ColorPaletteList.prototype.refreshPaletteList = function () {
         if (idx === this._currentIdx) {
             newPalette.classList.add("selected");
         }
-        newPalette.value = idx
+        newPalette.value = idx;
         const $mainColor = document.createElement("div");
         $mainColor.className = "mainColor"
         $mainColor.style.backgroundColor = palette.getMainColor().hexColor;
@@ -107,7 +107,7 @@ ColorPaletteList.prototype.rePaintPalette = function () {
 
     $colorItemList.forEach((item, idx) => {
 
-        const currentType = this.getCurrentPalette().getColorByType();
+        const currentType = this.getCurrentPalette().getColorType();
 
         let mixedColor = Color.mix(mainColor, baseColor, mixedRatio * idx);
         let mixedHexColor = mixedColor.getColorByType(currentType);

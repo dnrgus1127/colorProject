@@ -1,6 +1,9 @@
+import { customCreateElement } from "../utils/customCreateElement.js";
+
 export function renderInitialElements() {
 
     renderColoPalette();
+    renderNewPaletteContainer();
 }
 
 function renderColoPalette() {
@@ -59,5 +62,28 @@ function renderColoPalette() {
 
     })
 
+
+}
+
+
+function renderNewPaletteContainer() {
+    const $body = document.querySelector("body");
+    const newPaletteContainer = customCreateElement("div#newPaletteContainer");
+
+
+    const newPaletteWindow = customCreateElement("div#newPaletteWindow");
+
+
+    const newPaletteTitleInput = customCreateElement("input#newPaletteTitleInput");
+    newPaletteTitleInput.placeholder = "새 팔레트"
+    const newPaletteAddButton = customCreateElement("button#newPaletteAddButton");
+
+    newPaletteAddButton.innerHTML = `<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m6 18h-3c-.48 0-1-.379-1-1v-14c0-.481.38-1 1-1h14c.621 0 1 .522 1 1v3h3c.621 0 1 .522 1 1v14c0 .621-.522 1-1 1h-14c-.48 0-1-.379-1-1zm7.25-4.75h-2.5c-.414 0-.75.336-.75.75s.336.75.75.75h2.5v2.5c0 .414.336.75.75.75s.75-.336.75-.75v-2.5h2.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-2.5v-2.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75zm3.25-7.25v-2.5h-13v13h2.5v-9.5c0-.481.38-1 1-1z" fill-rule="nonzero"/></svg>`
+
+
+    newPaletteWindow.appendChild(newPaletteTitleInput);
+    newPaletteWindow.appendChild(newPaletteAddButton);
+    newPaletteContainer.appendChild(newPaletteWindow);
+    $body.appendChild(newPaletteContainer);
 
 }
