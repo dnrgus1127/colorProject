@@ -108,8 +108,8 @@ body > div {
 }
 
 #colorPalette {
-    padding: var(--side-padding);
-    padding-top: 0;
+    padding-bottom: var(--side-padding);
+    
     height: 72vh;
     overflow-y: auto;
 }
