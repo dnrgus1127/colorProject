@@ -1,9 +1,14 @@
+import { App } from "../Components/App.js";
+import { ContrastContainer } from "../Components/Contrast/ContrastContainer.js";
+import { colorPaletteList } from "../script.js";
 import { customCreateElement } from "../utils/customCreateElement.js";
 
 export function renderInitialElements() {
 
     renderColoPalette();
     renderNewPaletteContainer();
+    //renderContrastContainer();
+    renderAppComponent();
 }
 
 function renderColoPalette() {
@@ -85,5 +90,14 @@ function renderNewPaletteContainer() {
     newPaletteWindow.appendChild(newPaletteAddButton);
     newPaletteContainer.appendChild(newPaletteWindow);
     $body.appendChild(newPaletteContainer);
+
+}
+
+
+function renderAppComponent() {
+    const $app = document.getElementById("app");
+
+    new App($app);
+
 
 }

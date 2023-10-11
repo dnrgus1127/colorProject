@@ -1,3 +1,4 @@
+import { customCreateElement } from "../utils/customCreateElement.js";
 import { Color } from "./Color.js";
 import { ColorPalette } from "./ColorPalette.js";
 
@@ -10,6 +11,33 @@ export function ColorPaletteList() {
 
 ColorPaletteList.prototype.getCurrentPalette = function () {
     return this._colorPaletteArr[this._currentIdx];
+}
+ColorPaletteList.prototype.getPaletteLength = function () {
+    return this._colorPaletteArr.length;
+}
+ColorPaletteList.prototype.dropCurrentPalette = function () {
+    if (this._currentIdx === 0) {
+        return;
+    }
+
+    this._colorPaletteArr.pop();
+    this._currentIdx--;
+    this.refreshPaletteList();
+    this.rePaintPalette();
+}
+
+/**
+ * 
+ * @param {*} index 
+ * @returns 팔레트 배열에서 제거
+ */
+ColorPaletteList.prototype.dropPalette = function (index) {
+    if (this._colorPaletteArr.length === 1) return;
+
+    this._colorPaletteArr.splice(index, index + 1);
+    this._currentIdx = this._colorPaletteArr.length > index ? index : this._colorPaletteArr.length - 1;
+    this.refreshPaletteList();
+    this.rePaintPalette();
 }
 
 ColorPaletteList.prototype.addColorPalette = function (colorPalette) {
@@ -44,7 +72,7 @@ ColorPaletteList.prototype.prevIndex = function () {
     }
 
 }
-ColorPaletteList.prototype.setIndex = function (idx) {
+ColorPaletteList.prototype.setIndex = function (idx = this._currentIdx) {
     if (idx >= this._colorPaletteArr.length || idx < 0) {
         return
     }
@@ -63,19 +91,24 @@ ColorPaletteList.prototype.refreshPaletteList = function () {
     $paletteList.innerHTML = "";
 
     paletteArr.forEach((palette, idx) => {
-        const newPalette = document.createElement("div");
-        newPalette.className = "palette";
+        const newPalette = customCreateElement("div.palette");
+        newPalette.dataset.index = idx;
+
         if (idx === this._currentIdx) {
             newPalette.classList.add("selected");
         }
+        const dropButton = customCreateElement("button.dropButton");
+        dropButton.innerHTML = `<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/></svg>`
+        newPalette.appendChild(dropButton);
+
         newPalette.value = idx;
-        const $mainColor = document.createElement("div");
-        $mainColor.className = "mainColor"
+        const $mainColor = customCreateElement("div.mainColor");
+
         $mainColor.style.backgroundColor = palette.getMainColor().hexColor;
         newPalette.appendChild($mainColor);
 
-        const $baseColor = document.createElement("div");
-        $baseColor.className = "baseColor";
+        const $baseColor = customCreateElement("div.baseColor");
+
         $baseColor.style.backgroundColor = palette.getBaseColor().hexColor;
         newPalette.appendChild($baseColor);
 

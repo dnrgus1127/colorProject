@@ -52,6 +52,7 @@ html {
 }
 body {
     background-color: var(--current-color);
+    overflow:hidden;
 }
 
 html,body {
@@ -253,6 +254,7 @@ body > div {
     position:absolute;
     right: 0;
     cursor: pointer;
+    z-index: 8;
     fill : var(--element-color);;
 }
 
@@ -312,7 +314,11 @@ body > div {
 }
 .topButton  svg {
     fill: var(--element-color);
+    width: 2.4rem;
+    height: 2.4rem;
 }
+
+
 #complementaryButton {
     right: 0;
     
@@ -320,6 +326,10 @@ body > div {
 }
 #randomColorButton{
     left : 0; 
+}
+
+#contrastWindowToggleButton {
+    right: 8rem;
 }
 
 

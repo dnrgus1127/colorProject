@@ -1,6 +1,5 @@
 import { ColorPalette } from "../constructor/ColorPalette.js";
 import { colorPaletteList } from "../script.js";
-import { customCreateElement } from "../utils/customCreateElement.js";
 
 export function addPaletteContainerHandler() {
     const $toggleButton = document.getElementById("paletteListToggleButton");
@@ -23,6 +22,7 @@ export function addPaletteContainerHandler() {
     });
 
 
+    // 팔레트 전환, 새 팔레트 버튼 이벤트
     $paletteList.addEventListener("click", (e) => {
         // 이벤트 위임
         const clickElement = e.target;
@@ -46,7 +46,7 @@ export function addPaletteContainerHandler() {
     })
 
 
-    // 팔레트 리스트 컨테이너 밖 클릭 시 컨테이너 닫음
+    // 팔레트리스트 컨테이너 밖 클릭 시 컨테이너 display : none
     document.addEventListener("mousedown", (e) => {
         if (e.target !== $paletteListContainer && !$paletteListContainer.contains(e.target) && isToggle) {
 
@@ -59,13 +59,12 @@ export function addPaletteContainerHandler() {
     })
 
 
+
+
     const $paletteListButtons = document.getElementById("paletteListButtons");
+    const $paletteTitle = document.getElementById("paletteTitle");
 
-
-
-
-
-    const $paletteTitle = document.getElementById("paletteTitle")
+    // 팔레트 전환 버튼 (좌,우)
     $paletteListButtons.addEventListener("click", (e) => {
         let clickElement = e.target.closest(".paletteIndexButton");
 
@@ -107,6 +106,9 @@ export function addPaletteContainerHandler() {
     })
 
 
+    /**
+     * 팔레트 타이틀 화면 중간에 표시 
+     */
     function showPaletteTitle() {
         $paletteTitle.innerText = colorPaletteList.getCurrentPalette().title;
 
@@ -120,7 +122,6 @@ export function addPaletteContainerHandler() {
 
         $paletteTitle.style.opacity = 0;
         if (e.propertyName === "opacity" && getComputedStyle($paletteTitle).opacity === 0) {
-            console.log(1);
             $paletteTitle.style.zIndex = -3;
 
         }
@@ -145,21 +146,55 @@ export function addPaletteContainerHandler() {
 
 
     })
+
+    // 새 팔레트 이름 지정 input 관련
     $titleInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
             $newPaletteAddButton.click();
-
-
+            $titleInput.value = ""
+        }
+        if (e.key === "Escape") {
+            $newPaletteContainer.style.display = "none";
+            colorPaletteList.dropCurrentPalette();
         }
     })
 
 
     $newPaletteAddButton.addEventListener("click", (e) => {
-        colorPaletteList.getCurrentPalette().title = $titleInput.value;
+        colorPaletteList.getCurrentPalette().title = $titleInput.value || "새 팔레트";
         $newPaletteContainer.style.display = "none";
 
     })
 
+
+
+
+    // 팔레트 hover 효과 (삭제 버튼 view)
+    $paletteListContainer.addEventListener("mouseover", (e) => {
+        const hoverElement = e.target.closest(".palette");
+        // 팔레트 hover 시
+        if (hoverElement && colorPaletteList.getPaletteLength() > 1) {
+            hoverElement.querySelector("button").style.display = "block";
+        }
+    })
+    $paletteListContainer.addEventListener("mouseout", (e) => {
+        const hoverOutElement = e.target.closest(".palette");
+        // 팔레트 hover 시
+        if (hoverOutElement) {
+            hoverOutElement.querySelector("button").style.display = "none";
+        }
+    })
+    $paletteListContainer.addEventListener("click", (e) => {
+        const clickButton = e.target.closest(".dropButton");
+
+
+        if (clickButton) {
+            const closestPalette = clickButton.closest(".palette")
+
+            colorPaletteList.dropPalette(closestPalette.dataset.index);
+        }
+
+    })
 
 
 

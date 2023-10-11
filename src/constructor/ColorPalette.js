@@ -9,7 +9,7 @@ import { Color } from "./Color.js";
 */
 
 
-function ColorPalette(name = "title") {
+function ColorPalette(name = "새 타이틀") {
     this.title = name;
     this._colorType = COLOR_TYPE_HEX;
     this._mainColor = new Color(DEFAULT_COLOR);
