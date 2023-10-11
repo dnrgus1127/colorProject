@@ -47,6 +47,9 @@
     box-sizing: border-box;
 }
 
+svg {
+    fill : white;
+}
 html {
     font-size: 62.5%;
 }
@@ -78,6 +81,32 @@ body > div {
 }
 
 
+.button-svg svg{
+    width: 2.4rem;
+    height: 2.4rem;
+    fill: var(--element-color);
+}
+
+.roboto-mideum {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+}
+.poppins-bold {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #colorPalette {
     padding: var(--side-padding);
     padding-top: 0;
@@ -95,25 +124,21 @@ body > div {
 .colorItemBox {
     padding: 2rem;
     background-color: color-mix(in srgb, var(--test-color) 0%, white);    
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     position: relative;
-    gap: 3rem;
+    gap: 2rem;
 
 }
 
 .colorCode {
     font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     text-transform: uppercase;
  }
  
 .colorItemBox:hover .colorCode{
     font-size: 2.4rem;
-    font-weight: 600;
-    color: var(--element-color);
 
 }
 .colorItemBox:hover .colorItemButtonBox{
@@ -147,25 +172,15 @@ body > div {
 
 .colorItemBox:hover .colorItemButtonBox{
     display: flex;
-
 }
 
-.clipboardButton , .exChangeButton {
-    width: 2.4rem;
-    height: 2.4rem;
-}
 
-.clipboardButton:hover ,.exChangeButton:hover{
+.colorItemButtonBox button:hover{
     transform: scale(1.3);
     transition: all .3s ease-out;
 }
 
-.colorItemButtonBox svg {
-    fill: white;
-}
 
-
-/* controller grid */
 #searchWrapper {
     height: 20vh;
     display:flex;
@@ -177,25 +192,19 @@ body > div {
 #searchSelectionContainer {
     position: relative;
     width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
 }
+
 #searchColorInput { 
     width: 100%;
     height: 100%;
     font-size: 4.4rem;
     text-align: center;
-
     color : var(--element-color);
     outline: none;
-    font-family: 'Roboto', sans-serif;
     letter-spacing: .2rem;
     border-radius: 4px;
     padding: .5rem 3rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    
 }
 #searchColorInput:focus {
     color : var(--current-color);
@@ -279,9 +288,7 @@ body > div {
 
 #colorType {
     color : var(--element-color);   
-    font-weight: 800;
     font-size: 1.6rem;
-    font-family: 'Poppins', sans-serif;
     cursor: pointer;
     padding : .5rem 1rem;
     border : 2px solid var(--element-color);
@@ -301,22 +308,17 @@ body > div {
 #baseColorInputBox > input[type="text"] {
     color : var(--element-color);
     font-family: "Roboto" , sans-serif;
+    font-weight: 400;
     text-align: center;
     font-size: 1.6rem;
-    font-weight: 450;
     outline: none;
-    
 }
 
 .topButton {
     position: fixed;
     padding : var(--side-padding);
 }
-.topButton  svg {
-    fill: var(--element-color);
-    width: 2.4rem;
-    height: 2.4rem;
-}
+
 
 
 #complementaryButton {
@@ -336,12 +338,7 @@ body > div {
 #changeColorButton { 
     display: block;
 }
-#changeColorButton > svg{
-    fill: var(--element-color);
-    width: 2.4rem;
-    height: 2.4rem;
-    
-}
+
 
 @media screen and (max-width: 1024px){
     #searchColorInput {
@@ -378,6 +375,7 @@ body > div {
         font-size: 1.6rem;
     }
 }
+
 
 
 
