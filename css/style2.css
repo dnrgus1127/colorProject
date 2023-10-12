@@ -194,11 +194,10 @@
 
 #contrastContainer {
     position: absolute;
-    
+    top: 50vh;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #484848;
     z-index: 12;
     padding: var(--side-padding);
     display: flex;
@@ -254,7 +253,6 @@
 
 #rgbRangeController {
     
-
 }
 #rgbRangeController input[type=range]{
     display: block;
