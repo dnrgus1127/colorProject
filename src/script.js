@@ -4,7 +4,6 @@ import { topButtonsHandlers } from "./handler/buttons/topButtonsHandlers.js";
 import { colorControllerHandlers } from "./handler/colorControllerHandlers.js";
 
 import { addPaletteHandlers } from "./handler/colorPaletteHandlers.js";
-import { contrastContainerHandler } from "./handler/contrastConatinerHandlers.js";
 import { addPaletteContainerHandler } from "./handler/paletteContainerHandler.js";
 import { renderInitialElements } from "./views/renderInitialElements.js";
 

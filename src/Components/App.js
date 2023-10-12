@@ -1,6 +1,5 @@
 import { Component } from "../core/Component.js";
 import { colorPaletteList } from "../script.js";
-import { customCreateElement } from "../utils/customCreateElement.js";
 import { ContrastContainer } from "./Contrast/ContrastContainer.js";
 
 export class App extends Component {
@@ -8,16 +7,16 @@ export class App extends Component {
     setup() {
         this.state = {
             showContrastContainer: false,
+            prevHTML: this.$target.innerHTML,
         }
     }
     template() {
-        return customCreateElement("div#contrastContainer");
-
+        return this.state.prevHTML + `<div id="contrastContainer"></div>`
     }
 
     mounted() {
         const $contrastContainer = this.$target.querySelector("#contrastContainer");
-        $contrastContainer && new ContrastContainer($contrastContainer, {
+        new ContrastContainer($contrastContainer, {
             currentColor: colorPaletteList.getCurrentPalette().getMainColor(),
             setPaletteColor: (color) => {
                 colorPaletteList.getCurrentPalette().setMainColor(color);
@@ -28,10 +27,6 @@ export class App extends Component {
         });
     }
 
-    render() {
-        this.$target.appendChild(this.template());
-        this.mounted();
-    }
 
     onToggleContrast() {
         this.setState({ showContrastContainer: !this.state.showContrastContainer })

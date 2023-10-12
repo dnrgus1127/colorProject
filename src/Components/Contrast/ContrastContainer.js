@@ -10,12 +10,15 @@ export class ContrastContainer extends Component {
         }
     }
     template() {
-        this.$target.style.top = this.props.showContrastContainer ? 0 : "100vh";
-        this.$target.style.backgroundColor = this.state.currentColor.getColorByType(COLOR_TYPE_HEX);
+
         return `<div id="contrastPalette"></div>
                 <div id="contrastController"></div>`
     }
     mounted() {
+        requestAnimationFrame(() => {
+            this.$target.style.backgroundColor = this.state.currentColor.getColorByType(COLOR_TYPE_HEX);
+            this.$target.style.top = this.props.showContrastContainer ? "0" : "100vh"; // 수정된 부분
+        })
         new ContrastPalette(this.$target.querySelector("#contrastPalette"), {
             setColor: this.setColor.bind(this)
         });
