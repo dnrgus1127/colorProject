@@ -1,13 +1,12 @@
 import { App } from "../Components/App.js";
-import { ContrastContainer } from "../Components/Contrast/ContrastContainer.js";
-import { colorPaletteList } from "../script.js";
+
 import { customCreateElement } from "../utils/customCreateElement.js";
 
 export function renderInitialElements() {
 
     renderColoPalette();
     renderNewPaletteContainer();
-    renderAppComponent();
+    //    renderAppComponent();
 }
 
 function renderColoPalette() {
