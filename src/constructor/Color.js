@@ -62,6 +62,44 @@ export class Color {
         return new Color(color);
     }
 
+    getChangeLuminance(ratio) {
+        let decimal = Math.round(ratio);
+        let [r, g, b] = [this.r - decimal, this.g - decimal, this.b - decimal];
+
+
+        r = r < 0 ? 0 : r;
+        g = g < 0 ? 0 : g;
+        b = b < 0 ? 0 : b;
+
+        r = r > 255 ? 255 : r;
+        g = g > 255 ? 255 : g;
+        b = b > 255 ? 255 : b;
+
+        return new Color(`rgb(${r},${g},${b})`);
+    }
+
+    getIncreaseColor(type = "r", ratio) {
+        let result = {
+            r: this.r,
+            g: this.g,
+            b: this.b,
+
+            check() {
+                this.r = this.r < 0 ? 0 : this.r;
+                this.g = this.g < 0 ? 0 : this.g;
+                this.b = this.b < 0 ? 0 : this.b;
+
+                this.r = this.r > 255 ? 255 : this.r;
+                this.g = this.g > 255 ? 255 : this.g;
+                this.b = this.b > 255 ? 255 : this.b;
+            }
+        }
+
+        result[type] += Math.round(ratio);
+        result.check();
+
+        return new Color(`rgb(${result.r},${result.g},${result.b})`);
+    }
 
 
 
