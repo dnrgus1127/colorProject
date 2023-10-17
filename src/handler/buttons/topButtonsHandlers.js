@@ -1,29 +1,29 @@
 import { Color } from "../../constructor/Color.js";
-import { colorPaletteList } from "../../script.js";
 
-export function topButtonsHandlers() {
+export function topButtonsHandlers(paletteSelector) {
 
     const $complementaryButton = document.getElementById("complementaryButton");
 
     $complementaryButton.addEventListener("click", () => {
-        const currentPalette = colorPaletteList.getCurrentPalette();
-        const complementaryColor = currentPalette.getMainColor().getComplementary();
-
-        currentPalette.setMainColor(complementaryColor);
-        colorPaletteList.rePaintPalette();
-
+        const complementaryColor = paletteSelector.getState().currentColor.getComplementary();
+        paletteSelector.setColor(complementaryColor);
     })
 
     const $randomColorButton = document.getElementById("randomColorButton");
 
     $randomColorButton.addEventListener("click", () => {
-        const currentPalette = colorPaletteList.getCurrentPalette();
+        paletteSelector.setColor(Color.randomColor());
 
-        currentPalette.setMainColor(Color.randomColor());
-        currentPalette.setBaseColor(Color.randomColor());
-        colorPaletteList.rePaintPalette();
     })
 
 
+    const $paletteMenu = document.getElementById("paletteMenu");
+
+    $paletteMenu.addEventListener("click", (e) => {
+        const clickButton = e.target.closest("button");
+        if (clickButton) {
+            paletteSelector.setPaletteType(clickButton.value);
+        }
+    })
 
 }

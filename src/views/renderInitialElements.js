@@ -1,14 +1,13 @@
 
 import { customCreateElement } from "../utils/customCreateElement.js";
 
-export function renderInitialElements() {
+export function renderInitialElements(itemCounts) {
 
-    renderColoPalette();
+    renderColoPalette(itemCounts);
     renderNewPaletteContainer();
-    //    renderAppComponent();
 }
 
-function renderColoPalette() {
+function renderColoPalette(itemCounts) {
     const $colorPalette = document.getElementById("colorPalette");
 
     // 임시 코드
@@ -20,7 +19,7 @@ function renderColoPalette() {
 
     $colorPalette.appendChild(colorItemList);
 
-    (new Array(12).fill(0)).forEach(() => {
+    (new Array(itemCounts).fill(0)).forEach(() => {
         const colorItemBox = customCreateElement("div.colorItemBox.flex-center");
 
 
@@ -88,11 +87,3 @@ function renderNewPaletteContainer() {
 
 }
 
-
-function renderAppComponent() {
-    const $app = document.getElementById("app");
-
-    new App($app);
-
-
-}
