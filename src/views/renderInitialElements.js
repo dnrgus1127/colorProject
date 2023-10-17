@@ -1,4 +1,3 @@
-import { App } from "../Components/App.js";
 
 import { customCreateElement } from "../utils/customCreateElement.js";
 

@@ -1,7 +1,5 @@
-import { ContrastContainer } from "../../Components/Contrast/ContrastContainer.js";
 import { Color } from "../../constructor/Color.js";
 import { colorPaletteList } from "../../script.js";
-import { customCreateElement } from "../../utils/customCreateElement.js";
 
 export function topButtonsHandlers() {
 
