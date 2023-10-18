@@ -1,9 +1,14 @@
 import { Palette } from "../core/Palette.js";
+import { customCreateElement } from "../utils/customCreateElement.js";
 
 export class ContrastPalette extends Palette {
 
+    renderToolBox() {
+        super.renderToolBox();
+        const $contrastValue = customCreateElement("div#contrastValue.roboto-bold");
+        this.$toolBox.appendChild($contrastValue);
+    }
     repaint(state) {
-        console.log("repaint");
         // TODO 연속적으로 repaint 발생 시 최적화 , debounce 적용 필요?
         const $colorItemList = this.$target.querySelectorAll(".colorItemBox");
 
@@ -29,8 +34,12 @@ export class ContrastPalette extends Palette {
             this.repaintColorItem(item, itemColor, colorType);
 
         })
-        // 색상 CSS 변수 수정
-        document.documentElement.style.setProperty("--current-color", currentColor.hexColor);
-        document.documentElement.style.setProperty("--element-color", currentColor.getTextColor().hexColor);
+
+        const $contrastValue = this.$toolBox.querySelector("#contrastValue");
+        $contrastValue.innerText = currentColor.getLuminance().toFixed(4);
+
+        super.repaint(currentColor);
     }
+
+
 }   

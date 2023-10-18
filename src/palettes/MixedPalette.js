@@ -22,9 +22,8 @@ export class MixedPalette extends Palette {
             this.repaintColorItem(item, itemColor, colorType);
 
         })
-        // 색상 CSS 변수 수정
-        document.documentElement.style.setProperty("--current-color", currentColor.hexColor);
-        document.documentElement.style.setProperty("--element-color", currentColor.getTextColor().hexColor);
+        super.repaint(currentColor);
+
 
 
     }
