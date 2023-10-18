@@ -5,9 +5,7 @@ import { topButtonsHandlers } from "./handler/buttons/topButtonsHandlers.js";
 import { colorControllerHandlers } from "./handler/colorControllerHandlers.js";
 
 import { addPaletteHandlers } from "./handler/colorPaletteHandlers.js";
-import { contrastContainerHandler } from "./handler/contrastConatinerHandlers.js";
-import { addPaletteContainerHandler } from "./handler/paletteContainerHandler.js";
-import { renderInitialElements } from "./views/renderInitialElements.js";
+
 
 
 
@@ -18,7 +16,8 @@ colorPaletteList.addColorPalette(new ColorPalette("다크모드"));
 
 
 const $colorPalette = document.getElementById("colorPalette");
-export const paletteSelector = new PaletteSelector($colorPalette);
+const $colorToolBox = document.getElementById("colorToolBox");
+export const paletteSelector = new PaletteSelector($colorPalette, $colorToolBox);
 addPaletteHandlers(paletteSelector);
 colorControllerHandlers(paletteSelector);
 topButtonsHandlers(paletteSelector);

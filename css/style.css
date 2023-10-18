@@ -74,6 +74,17 @@ html,body {
     height: 8vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    
+}
+
+#contrastValue {
+    color : var(--element-color);
+    font-size: 1.6rem;
+    border : 2px solid var(--element-color);
+    border-radius: 4px;
+    padding: .5rem;
+    
 }
 
 body > div {

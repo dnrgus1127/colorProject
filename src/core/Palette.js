@@ -4,8 +4,10 @@ import { renderInitialElements } from "../views/renderInitialElements.js";
 
 export class Palette {
     $target;
-    constructor(paletteViewerElement) {
+    $toolBox;
+    constructor(paletteViewerElement, toolBox) {
         this.$target = paletteViewerElement;
+        this.$toolBox = toolBox;
         this.itemCounts = 25;
         this.init = true;
     }
@@ -63,6 +65,13 @@ export class Palette {
             colorItemBox.appendChild(overlay);
 
         })
+        this.renderToolBox();
+    }
+    renderToolBox() {
+        this.$toolBox.innerHTML = ``;
+        let colorType = customCreateElement("div#colorType.poppins-bold");
+        colorType.innerText = "RGB";
+        this.$toolBox.appendChild(colorType);
 
     }
     render(colorState, init) {
@@ -77,13 +86,15 @@ export class Palette {
         this.repaint(colorState);
     }
 
-    repaint(state) {
+    repaint(color) {
+        // 색상 CSS 변수 수정
+        document.documentElement.style.setProperty("--current-color", color.hexColor);
+        document.documentElement.style.setProperty("--element-color", color.getTextColor().hexColor);
 
     }
 
     // 배경, 텍스트 색상, 클립보드 값
     repaintColorItem(item, color = new Color("#FFFFFF"), colorType) {
-        console.log("🚀 ~ file: Palette.js:86 ~ Palette ~ repaintColorItem ~ colorType:", colorType)
         item.style.backgroundColor = color.hexColor;
         const colorCode = item.querySelector(".colorCode");
         colorCode.innerText = color.getColorByType(colorType);

@@ -159,9 +159,6 @@ ColorPaletteList.prototype.rePaintPalette = function () {
 
     })
 
-    // RGB 박스 값 수정
-    setRgbBox(mainColor.hexColor);
-
     // 색상 CSS 변수 수정
     document.documentElement.style.setProperty("--current-color", mainColor.hexColor);
     document.documentElement.style.setProperty("--element-color", mainColor.getTextColor().hexColor);
@@ -185,18 +182,7 @@ const updateColorValues = (mainColor, baseColor, colorType) => {
 };
 
 
-function setRgbBox(hexColor) {
-    const [r, g, b] = (new Color(hexColor)).getRGBArray();
 
-    const rgbBox = document.getElementById("rgbBox");
-
-    const [inputR, inputG, inputB] = rgbBox.querySelectorAll("input");
-
-    inputR.value = r;
-    inputG.value = g;
-    inputB.value = b;
-
-}
 
 
 

@@ -7,17 +7,19 @@ import { RGBWPalette } from "../palettes/RGBWPalette.js";
 
 export class PaletteSelector {
     $target
-    constructor(paletteViewer) {
+    $toolBox
+    constructor(paletteViewer, toolBox) {
         this.$target = paletteViewer;
+        this.$toolBox = toolBox;
         this.state = {
             currentColor: new Color("#121212"),
             colorType: COLOR_TYPE_HEX,
         };
-        this.paletteType = 2;
+        this.paletteType = 0;
         this.paletteList = [];
-        this.paletteList.push(new ContrastPalette(this.$target));
-        this.paletteList.push(new MixedPalette(this.$target));
-        this.paletteList.push(new RGBWPalette(this.$target));
+        this.paletteList.push(new ContrastPalette(this.$target, this.$toolBox));
+        this.paletteList.push(new MixedPalette(this.$target, this.$toolBox));
+        this.paletteList.push(new RGBWPalette(this.$target, this.$toolBox));
         this.render();
     }
     render(init) {
@@ -40,6 +42,7 @@ export class PaletteSelector {
             ...this.state,
             colorType: colorType,
         }
+        this.notifyColor();
         this.render();
     }
     getState() {
