@@ -19,7 +19,7 @@ export function customCreateElement(elementSting) {
         }
         else {
             tagName = splitArr[0];
-            [id, className] = splitArr[1].split(".");
+            [id, ...classList] = splitArr[1].split(".");
         }
     }
     else if (elementSting.includes(".")) {
@@ -37,7 +37,6 @@ export function customCreateElement(elementSting) {
     classList.forEach(item => {
         element.classList.add(item);
     })
-
 
     return element;
 
