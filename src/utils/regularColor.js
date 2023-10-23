@@ -606,7 +606,7 @@ export function getRegularColor(text) {
         return item.toUpperCase() === text.toUpperCase();
     })
     if (!found) {
-        return null;
+        return undefined;
     }
 
 
