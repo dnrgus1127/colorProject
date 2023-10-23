@@ -70,6 +70,7 @@ html,body {
     background-color: var(--point-color);
 }
 
+/* toolBox 관련 */
 #colorToolBox {
     height: 8vh;
     display: flex;
@@ -77,6 +78,25 @@ html,body {
     justify-content: space-between;
     
 }
+#mixInput {
+    color :var(--element-color);
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+
+}
+#mixWrapper{
+    display: flex;
+    align-items: center;
+    
+}
+#rgbWeight{
+    color: var(--element-color);
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: end;
+}
+/*toolBox---------------------*/
 
 #contrastValue {
     color : var(--element-color);
@@ -130,7 +150,7 @@ body > div {
     justify-content: space-between;
 }
 #paletteMenu button {
-    color : white;
+    color : var(--element-color);
     font-weight: 600;
     font-size: 1.6rem;
     flex: 1;

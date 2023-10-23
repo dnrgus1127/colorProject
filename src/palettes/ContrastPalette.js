@@ -1,4 +1,5 @@
 import { Palette } from "../core/Palette.js";
+import { paletteStore } from "../script.js";
 import { customCreateElement } from "../utils/customCreateElement.js";
 
 export class ContrastPalette extends Palette {
@@ -8,11 +9,10 @@ export class ContrastPalette extends Palette {
         const $contrastValue = customCreateElement("div#contrastValue.roboto-bold");
         this.$toolBox.appendChild($contrastValue);
     }
-    repaint(state) {
-        // TODO 연속적으로 repaint 발생 시 최적화 , debounce 적용 필요?
+    repaint() {
         const $colorItemList = this.$target.querySelectorAll(".colorItemBox");
 
-        const { currentColor, colorType } = state;
+        const { currentColor, colorType } = paletteStore.state;
 
         const luminanceRatio = 255 / this.itemCounts;
         let currentIdx = this.itemCounts - Math.floor(currentColor.getLuminance() * this.itemCounts) - 1;

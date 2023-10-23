@@ -1,6 +1,6 @@
 import { Color } from "../constructor/Color.js";
+import { paletteStore } from "../script.js";
 import { customCreateElement } from "../utils/customCreateElement.js";
-import { renderInitialElements } from "../views/renderInitialElements.js";
 
 export class Palette {
     $target;
@@ -9,15 +9,13 @@ export class Palette {
         this.$target = paletteViewerElement;
         this.$toolBox = toolBox;
         this.itemCounts = 25;
-        this.init = true;
     }
+
     prevRender() {
-        console.log("prev");
         const $colorPalette = document.getElementById("colorPalette");
 
         // 임시 코드
         $colorPalette.innerHTML = "";
-        //
 
         const colorItemList = customCreateElement("div.colorItemList");
 
@@ -72,18 +70,20 @@ export class Palette {
         let colorType = customCreateElement("div#colorType.poppins-bold");
         colorType.innerText = "RGB";
         this.$toolBox.appendChild(colorType);
-
     }
-    render(colorState, init) {
+    handler() {
+        const $colorType = this.$toolBox.querySelector("#colorType");
+        $colorType.addEventListener("click", () => {
+            $colorType.innerText = paletteStore.state.colorType;
+            paletteStore.setColorType($colorType.innerText === "HEX" ? "RGB" : "HEX");
+        })
+    }
+    render(init) {
         if (init) {
-            this.init = true;
-        }
-        if (this.init) {
             this.prevRender();
-            this.init = false;
+            this.handler();
         }
-        // 렌더링
-        this.repaint(colorState);
+        this.repaint();
     }
 
     repaint(color) {
@@ -104,5 +104,6 @@ export class Palette {
         const clipboardButton = item.querySelector(".clipboardButton");
         clipboardButton.value = color.getColorByType(colorType);
     }
+
 
 }
