@@ -14,11 +14,15 @@ export class PaletteStore extends Observer {
         });
         this.initStore({
             key: "paletteType",
-            initValue: 1,
+            initValue: 2,
         });
         this.initStore({
             key: "mixColor",
             initValue: new Color("#FFFFFF")
+        });
+        this.initStore({
+            key: "rgbWeight",
+            initValue: 24,
         })
     }
 
