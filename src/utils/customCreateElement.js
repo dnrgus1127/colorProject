@@ -1,7 +1,7 @@
 /**
- * #,. 태그를 이용해서 새로운 엘리먼트 생성 
- * @param {*} elementSting  (div.class, div#id, div#id.class div#id.class.class2)
- * @returns 
+ * #,. 태그를 이용하여 요소 생성 
+ * @param {string} elementSting  (div.class, div#id, div#id.class div#id.class.class2)
+ * @returns 만들어진 DOM 요소 반환
  */
 export function customCreateElement(elementSting) {
     let tagName = "";
@@ -33,7 +33,9 @@ export function customCreateElement(elementSting) {
     }
 
     const element = document.createElement(tagName);
-    element.id = id;
+    if (id) {
+        element.id = id;
+    }
     classList.forEach(item => {
         element.classList.add(item);
     })
