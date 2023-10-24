@@ -23,14 +23,14 @@
 
 @media screen and (max-width : 1024px) {
     :root {
-        --grid-col :3;
+        --grid-col :4;
     }
 }
 
 @media screen and (max-width : 768px){
  
     :root {
-        --grid-col : 2;
+        --grid-col : 3;
     }
 }
 
@@ -141,19 +141,24 @@ body > div {
 
 #paletteMenu {
     position: absolute;
-    top:0;
+    bottom:0;
     left: calc(50% - 7.5vw);
     z-index: 9;
     width: 15vw;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 #paletteMenu button {
     color : var(--element-color);
     font-weight: 600;
     font-size: 1.6rem;
     flex: 1;
+}
+#paletteMenu button.selected {
+    border-bottom: 2px solid var(--element-color);
+    font-weight: 800;
 }
 
 #colorPalette {
