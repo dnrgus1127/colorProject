@@ -1,15 +1,16 @@
 
-import { Color } from "../constructor/Color.js";
+import { Color } from "../core/Color.js";
+import { paletteStore } from "../script.js";
 
-import { checkHexa, checkRgb, validateColorCode } from "../utils/regex/validColor.js";
+import { checkHexa, checkRgb } from "../utils/regex/validColor.js";
 import { COLOR_DATA, getRegularColor } from "../utils/regularColor.js";
+import { searchColor } from "../utils/searchColor.js";
 
-export function colorControllerHandlers(paletteSelector) {
-    addColorSearchHandlers(paletteSelector);
-    addColorTypeHandlers(paletteSelector);
+export function colorControllerHandlers() {
+    addColorSearchHandlers();
 }
 
-function addColorSearchHandlers(paletteSelector) {
+function addColorSearchHandlers() {
     const $colorPicker = document.getElementById("colorPicker");
     const $searchColorInput = document.getElementById("searchColorInput");
     const $searchResult = document.getElementById("searchResult");
@@ -22,41 +23,29 @@ function addColorSearchHandlers(paletteSelector) {
     })
     $colorPicker.addEventListener("input", (e) => {
         const pickedColor = new Color(e.target.value);
-        paletteSelector.setColor(pickedColor);
-        // TODO 성능 개선 필요
+        paletteStore.setColor(pickedColor);
     })
 
     $searchColorInput.addEventListener("change", (e) => {
         let inputText = e.target.value;
 
-        const { currentColor, colorType } = paletteSelector.getState();
+        const { currentColor } = paletteStore.state;
 
+        const color = searchColor(inputText);
 
-        if (inputText.length === 0) {
-            $searchColorInput.value = currentColor.getColorByType(colorType);
+        if (!color) {
+            paletteStore.setColor(currentColor);
             $searchColorInput.blur();
             blurInputCss();
-            return;
         }
+        else {
+            let textColorType = Color.getColorType(inputText);
+            if (textColorType) paletteStore.setColorType(textColorType);
 
-        // 정규 색상 검사 ex) white , blue, grey, green, lightgrey 등
-        const regularColor = getRegularColor(inputText);
-        if (regularColor) {
-            inputText = regularColor.getColorByType(colorType);
+            paletteStore.setColor(color);
         }
-
-        // #ffffff, rgb 형식 검사
-        if (!checkRgb(inputText) && !checkHexa(inputText)) return;
-
-
         $searchColorInput.blur();
-
-        if (!regularColor) paletteSelector.setColorType(Color.getColorType(inputText));
-
-        paletteSelector.setColor(new Color(inputText));
         blurInputCss();
-        $searchResult.innerHTML = ""
-
 
     })
     // 연관 검색 색상 목록 추가
@@ -162,96 +151,3 @@ function addColorSearchHandlers(paletteSelector) {
 
 
 }
-
-function addColorTypeHandlers(paletteSelector) {
-
-    const $colorType = document.getElementById("colorType");
-    $colorType.addEventListener("click", () => {
-
-
-        $colorType.innerText = paletteSelector.getState().colorType;
-        paletteSelector.setColorType($colorType.innerText === "HEX" ? "RGB" : "HEX");
-
-    })
-}
-
-
-// function addColorToolBoxHandlers() {
-//     const $baseColorInput = document.getElementById("baseColorInput");
-//     $baseColorInput.value = DEFAULT_BASE_COLOR;
-//     const $baseColorPicker = document.getElementById("baseColorPicker");
-//     $baseColorPicker.value = DEFAULT_BASE_COLOR;
-
-//     const $changeColorButton = document.getElementById("changeColorButton");
-
-
-//     // Base, Main 컬러 상호 교체
-
-//     $changeColorButton.addEventListener("click", () => {
-//         colorPaletteList.getCurrentPalette().colorExchange();
-//         colorPaletteList.rePaintPalette();
-//     })
-
-
-//     $baseColorPicker.addEventListener("input", (e) => {
-//         const color = new Color(e.target.value);
-//         $baseColorInput.value = color.getColorByType(COLOR_TYPE_HEX);
-//         colorPaletteList.getCurrentPalette().setBaseColor(color);
-//         colorPaletteList.rePaintPalette();
-
-//     })
-//     $baseColorInput.addEventListener("change", (e) => {
-
-//         if (!validateColorCode(e.target.value)) {
-//             alert("색상 값이 올바르지 않습니다.");
-//             $baseColorInput.value = convertColorByType(DEFAULT_BASE_COLOR, SettingObj.colorType);
-//             return;
-//         }
-//         const color = new Color(e.target.value);
-
-//         $baseColorPicker.value = color.getColorByType(COLOR_TYPE_HEX);
-//         colorPaletteList.getCurrentPalette().setBaseColor(color);
-//         colorPaletteList.rePaintPalette();
-
-//     })
-
-
-//     const $colorType = document.getElementById("colorType");
-//     $colorType.addEventListener("click", () => {
-//         const currentPalette = colorPaletteList.getCurrentPalette();
-
-//         $colorType.innerText = currentPalette.getColorType();
-//         currentPalette.setColorType($colorType.innerText === "HEX" ? "RGB" : "HEX");
-
-//         changeColorTypeView(currentPalette.getColorType());
-//     })
-
-
-
-
-
-
-// }
-
-
-
-
-// // TODO colorPalette 기반으로 리팩토링
-// export function changeColorTypeView(colorType) {
-
-//     const hexColorList = document.querySelectorAll(".colorCode");
-
-
-//     hexColorList.forEach((item) => {
-
-//         let colorCode = item.tagName === "INPUT" ? item.value : item.innerText;
-
-//         const color = new Color(colorCode);
-
-//         item.innerText = color.getColorByType(colorType);
-//         item.value = color.getColorByType(colorType);
-//     })
-
-
-
-// }
