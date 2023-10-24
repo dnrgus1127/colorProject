@@ -1,12 +1,12 @@
-import { COLOR_TYPE_HEX, COLOR_TYPE_RGB } from "../constants.js";
-import { Color } from "../constructor/Color.js";
+import { COLOR_TYPE_HEX, COLOR_TYPE_RGB } from "../core/constants.js";
+import { Color } from "../core/Color.js";
 import { Observer } from "../core/Observer.js";
 
 export class PaletteStore extends Observer {
     setup() {
         this.initStore({
             key: "currentColor",
-            initValue: new Color("#121212")
+            initValue: Color.randomColor(),
         });
         this.initStore({
             key: "colorType",
@@ -23,8 +23,13 @@ export class PaletteStore extends Observer {
         this.initStore({
             key: "rgbWeight",
             initValue: 24,
+        });
+        this.initStore({
+            key: "itemCounts",
+            initValue: 25,
         })
     }
+
 
 
     setColor(color) {
