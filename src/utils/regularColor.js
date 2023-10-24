@@ -1,4 +1,4 @@
-import { Color } from "../constructor/Color.js";
+import { Color } from "../core/Color.js";
 
 
 export const COLOR_DATA = {

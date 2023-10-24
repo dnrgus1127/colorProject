@@ -1,4 +1,4 @@
-import { Color } from "../constructor/Color.js";
+import { Color } from "../core/Color.js";
 import { checkHexa, checkRgb } from "./regex/validColor.js";
 import { getRegularColor } from "./regularColor.js";
 
