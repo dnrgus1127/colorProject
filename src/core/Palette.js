@@ -1,4 +1,4 @@
-import { Color } from "../constructor/Color.js";
+import { Color } from "./Color.js";
 import { paletteStore } from "../script.js";
 import { customCreateElement } from "../utils/customCreateElement.js";
 
@@ -8,10 +8,11 @@ export class Palette {
     constructor(paletteViewerElement, toolBox) {
         this.$target = paletteViewerElement;
         this.$toolBox = toolBox;
-        this.itemCounts = 25;
+        this.itemCounts = paletteStore.state.itemCounts;
     }
 
     prevRender() {
+
         const $colorPalette = document.getElementById("colorPalette");
 
         // 임시 코드
