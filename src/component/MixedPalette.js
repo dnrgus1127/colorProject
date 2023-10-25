@@ -1,3 +1,4 @@
+import { getBrowserType } from "../browser/checkBrowser.js";
 import { Color } from "../core/Color.js";
 import { Palette } from "../core/Palette.js";
 import { paletteStore } from "../script.js";
@@ -13,6 +14,9 @@ export class MixedPalette extends Palette {
         const $mixColorSelector = customCreateElement("input#mixColor");
         $mixColorSelector.type = "color";
         $mixColorSelector.value = mixColor.getColorByType(colorType);
+        if (getBrowserType() === "Safari") {
+            $mixColorSelector.style.border = `1px solid var(--element-color)`;
+        }
 
         const $mixColorInput = customCreateElement("input#mixInput");
         $mixColorInput.type = "text";
