@@ -38,7 +38,7 @@ function reRenderItemCounts(target) {
         paletteStore.setState({ key: "itemCounts", value: 16 });
         type = 768;
     }
-    if (target.innerWidth < 768 && type !== 480) {
+    if (target.innerWidth <= 768 && type !== 480) {
         paletteStore.setState({ key: "itemCounts", value: 15 });
         type = 480;
     }
@@ -46,6 +46,11 @@ function reRenderItemCounts(target) {
 reRenderItemCounts(window);
 window.addEventListener("resize", (e) => {
     reRenderItemCounts(e.target);
+})
+
+paletteStore.subscribe("paletteType", () => {
+    const $paletteTypeWrapper = document.getElementById("paletteTypeWrapper");
+    $paletteTypeWrapper.style.top = `-${paletteStore.state.paletteType * 100}% `
 })
 
 

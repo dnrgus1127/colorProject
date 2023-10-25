@@ -12,11 +12,12 @@
 </head>
 
 <body>
-
     <div id="paletteMenu">
-        <button value="0">명암</button>
-        <button value="1">조합</button>
-        <button value="2">RGB</button>
+        <div id="paletteTypeWrapper">
+            <div class="paletteType">명암</div>
+            <div class="paletteType">조합</div>
+            <div class="paletteType">확장</div>
+        </div>
     </div>
 
     <button id="complementaryButton" class="topButton button-svg">
@@ -96,6 +97,7 @@
     </div>
 
     <script type="module" src="src/script.js"></script>
+    <script src="src/browser/initSafari.js"></script>
 
 
 
