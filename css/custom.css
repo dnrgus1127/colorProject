@@ -1,7 +1,7 @@
 .custom-slider {
     
     position: relative;
-    width: 20vh;
+    width: 20vw;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -39,12 +39,12 @@
     
 }
 
-.sldier-range::webkit-slider-thumb{
+/* .sldier-range::webkit-slider-thumb{
     
 }
 .sldier-range::-moz-range-thumb{
 
-}
+} */
 
 .slider-icon {
     width: 24px;
