@@ -16,6 +16,7 @@
     --side-padding : 4rem;
 
     --grid-col : 5;
+    --vh : 100%;
 
     --element-color : #ffffff;
     --current-color : "#121212";
@@ -37,7 +38,7 @@
 
 @media screen and (max-width: 480px) {
     :root {
-        --grid-col : 1;
+        --grid-col : 2;
     }
     
 }
@@ -59,9 +60,11 @@ body {
 }
 
 html,body {
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    height: var(--vh);
 }
+
+
 
 #header {
     
@@ -72,7 +75,7 @@ html,body {
 
 /* toolBox 관련 */
 #colorToolBox {
-    height: 8vh;
+    height: 28%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -160,15 +163,18 @@ body > div {
     border-bottom: 2px solid var(--element-color);
     font-weight: 800;
 }
-
+#colorController {
+    height: 28%;
+}
 #colorPalette {
     padding-bottom: var(--side-padding);
     
-    height: 72vh;
+    height: 72%;
     overflow-y: auto;
 }
 
 .colorItemList {
+    /* TODO 디자인 물어보기 border: 3px solid var(--element-color); */
     display: grid;
     grid-template-columns: repeat(var(--grid-col),1fr);
     grid-auto-rows: 1fr;
@@ -191,7 +197,7 @@ body > div {
  }
  
 .colorItemBox:hover .colorCode{
-    font-size: 2.4rem;
+    font-size: 1.6rem
 
 }
 .colorItemBox:hover .colorItemButtonBox{
@@ -235,7 +241,7 @@ body > div {
 
 
 #searchWrapper {
-    height: 20vh;
+    height: 72%;
     display:flex;
     padding : 0 var(--side-padding);
     align-items: center;
@@ -327,6 +333,18 @@ body > div {
     right: 0;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    #colorPickerIcon{
+        opacity: 0;
+    }
+    #colorPicker {
+        visibility: visible;
+        outline: var(--element-color);
+        border : 1px solid var(--element-color);
+    }
+  }
+
+
 #rgbBox, #rgbBox > input {
     font-size: 1.6rem;
     font-family: 'Poppins', sans-serif;
@@ -397,6 +415,13 @@ body > div {
     #searchColorInput {
         font-size: 3.8rem;
     }
+
+    .colorItemBox {
+        padding : 1rem;
+    }
+    .colorCode{
+        text-transform: lowercase;
+    }
 }
 
 @media screen and (max-width: 768px){
@@ -417,7 +442,10 @@ body > div {
     }
     #rgbBox > input{
         width: 20%;
+        
     }
+
+ 
 }
 
 @media screen and (max-width: 480px){
@@ -431,4 +459,9 @@ body > div {
 
 
 
-
+/* 태블릿 가로모드 */
+@media screen and (max-height : 768px){
+    .colorItemBox{
+        gap: 1rem;
+    }   
+}

@@ -25,7 +25,20 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	
 }
+*{
+	touch-action: pan-x pan-y;
+}
+body {
+	min-height: 100vh;
+	min-height: -webkit-fill-available;
+  }
+  
+html {
+	height: -webkit-fill-available;
+}
+
 ol, ul {
 	list-style: none;
 }
