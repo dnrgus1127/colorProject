@@ -22,13 +22,13 @@
     --current-color : "#121212";
 }
 
-@media screen and (max-width : 1024px) {
+@media screen and (max-width : 1023px) {
     :root {
         --grid-col :4;
     }
 }
 
-@media screen and (max-width : 768px){
+@media screen and (max-width : 767px){
  
     :root {
         --grid-col : 3;
@@ -36,9 +36,9 @@
 }
 
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 479px) {
     :root {
-        --grid-col : 2;
+        --grid-col : 1;
     }
     
 }
@@ -81,6 +81,7 @@ html,body {
     justify-content: space-between;
     
 }
+
 #mixInput {
     color :var(--element-color);
     font-size: 1.6rem;
@@ -144,24 +145,31 @@ body > div {
 
 #paletteMenu {
     position: absolute;
-    bottom:0;
+    top: calc(28% - 8%);
     left: calc(50% - 7.5vw);
     z-index: 9;
     width: 15vw;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
+    height: 8%;
+    overflow: hidden;
 }
-#paletteMenu button {
+#paletteTypeWrapper{
+    transition: all .5s cubic-bezier(0.4, 0, 1, 1);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.paletteType{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
     color : var(--element-color);
     font-weight: 600;
     font-size: 1.6rem;
-    flex: 1;
-}
-#paletteMenu button.selected {
-    border-bottom: 2px solid var(--element-color);
-    font-weight: 800;
+    text-align: center;
 }
 #colorController {
     height: 28%;
@@ -205,6 +213,11 @@ body > div {
     justify-content: center;
     gap: 3.2rem;
 }
+.colorItemBox:hover svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    fill : white;
+}
 .overlay-colorItemBox {
     position: absolute;
     width: 100%;
@@ -222,6 +235,7 @@ body > div {
 
 .colorCode, .clipboardButton, .exChangeButton{
     z-index: 2;
+    
     
 }
 .colorItemBox .colorItemButtonBox {
@@ -331,18 +345,8 @@ body > div {
     visibility: hidden;
     position: absolute;
     right: 0;
+    background-color: var(--element-color);
 }
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-    #colorPickerIcon{
-        opacity: 0;
-    }
-    #colorPicker {
-        visibility: visible;
-        outline: var(--element-color);
-        border : 1px solid var(--element-color);
-    }
-  }
 
 
 #rgbBox, #rgbBox > input {
