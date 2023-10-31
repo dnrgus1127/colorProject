@@ -6,7 +6,8 @@ export class PaletteStore extends Observer {
     setup() {
         this.initStore({
             key: "currentColor",
-            initValue: Color.randomColor(),
+            //initValue: Color.randomColor(),
+            initValue: new Color("#918c82"),
         });
         this.initStore({
             key: "colorType",
@@ -22,7 +23,7 @@ export class PaletteStore extends Observer {
         });
         this.initStore({
             key: "rgbWeight",
-            initValue: 24,
+            initValue: 48,
         });
         this.initStore({
             key: "itemCounts",
