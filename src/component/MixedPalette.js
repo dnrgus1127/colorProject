@@ -16,6 +16,7 @@ export class MixedPalette extends Palette {
         $mixColorSelector.value = mixColor.getColorByType(colorType);
         if (getBrowserType() === "Safari") {
             $mixColorSelector.style.border = `1px solid var(--element-color)`;
+            $mixColorSelector.classList.add("circle");
         }
 
         const $mixColorInput = customCreateElement("input#mixInput");
