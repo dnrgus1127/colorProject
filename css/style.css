@@ -87,6 +87,7 @@ html,body {
     font-size: 1.6rem;
     font-weight: 600;
     text-align: center;
+    width: 15rem;   
 
 }
 #mixWrapper{
@@ -105,7 +106,7 @@ html,body {
 #contrastValue {
     color : var(--element-color);
     font-size: 1.6rem;
-    border : 2px solid var(--element-color);
+    border : 1px solid var(--element-color);
     border-radius: 4px;
     padding: .5rem;
     
@@ -146,9 +147,9 @@ body > div {
 #paletteMenu {
     position: absolute;
     top: calc(28% - 8%);
-    left: calc(50% - 7.5vw);
+    left: calc(50% - 4rem);
     z-index: 9;
-    width: 15vw;
+    width: 8rem;
     height: 8%;
     overflow: hidden;
 }
@@ -170,6 +171,7 @@ body > div {
     font-weight: 600;
     font-size: 1.6rem;
     text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 #colorController {
     height: 28%;
@@ -195,6 +197,9 @@ body > div {
     flex-direction: column;
     position: relative;
     gap: 2rem;
+}
+body,.colorItemBox {
+    transition: background-color .5s ease-in-out;
 }
 
 .colorCode {
@@ -338,6 +343,7 @@ body > div {
     cursor: pointer;
     z-index: 8;
     fill : var(--element-color);;
+    
 }
 
 
@@ -346,6 +352,13 @@ body > div {
     position: absolute;
     right: 0;
     background-color: var(--element-color);
+
+}
+#colorPicker.circle, #mixColor.circle {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid var(--element-color);
 }
 
 
@@ -366,7 +379,7 @@ body > div {
     font-size: 1.6rem;
     cursor: pointer;
     padding : .5rem 1rem;
-    border : 2px solid var(--element-color);
+    border : 1px solid var(--element-color);
     border-radius: 4px;
 }
 #colorType:hover {
@@ -415,6 +428,7 @@ body > div {
 }
 
 
+/* 태블릿 가로, 저해상도 PC */
 @media screen and (max-width: 1024px){
     #searchColorInput {
         font-size: 3.8rem;
@@ -428,6 +442,7 @@ body > div {
     }
 }
 
+/* 모바일 가로, 태블릿 세로 */
 @media screen and (max-width: 768px){
     #searchSelectionContainer {
         width: 70%;
@@ -451,7 +466,7 @@ body > div {
 
  
 }
-
+/* 모바일 세로 */
 @media screen and (max-width: 480px){
     #searchSelectionContainer {
         width: 80%;
@@ -459,6 +474,11 @@ body > div {
     #searchColorInput {
         font-size: 1.6rem;
     }
+    #paletteMenu {
+        top: 0;
+        
+    }
+
 }
 
 
