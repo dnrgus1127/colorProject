@@ -1,5 +1,9 @@
 # ColorGenerator (색상 생성 프로그램)
 
+![Snipaste_2023-10-31_14-38-07](https://github.com/dnrgus1127/colorProject/assets/65962363/2d932999-66e5-439e-b9db-768e3b7bb4da)
+
+
+
 # ColorGenerator v 1.0
 
 > 개발 시에 필요한 색상을 편하게 찾을 수 있게 도와주는 웹 페이지.<br>
@@ -21,7 +25,8 @@
 
 <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
 <img src="https://img.shields.io/badge/babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=white">
-<img src="https://img.shields.io/badge/webpack-8DD6F9?style=for-the-badge&logo=npm&logoColor=white">
+<img src="https://img.shields.io/ba![Snipaste_2023-10-31_14-38-07](https://github.com/dnrgus1127/colorProject/assets/65962363/12405190-d428-4dff-b9c3-138acfd71eef)
+dge/webpack-8DD6F9?style=for-the-badge&logo=npm&logoColor=white">
 
 ## Language
 
