@@ -3,8 +3,6 @@
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/2d932999-66e5-439e-b9db-768e3b7bb4da" width="49%"/>
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/f97db4e6-7b65-40ce-8066-01a0e630d516" width="49%"/>
 
-![image](https://github.com/dnrgus1127/colorProject/assets/65962363/13a608af-a4e0-4301-8199-641b0b846b5e)
-
 # ColorGenerator v 1.0
 
 > 개발 시에 필요한 색상을 편하게 찾을 수 있게 도와주는 웹 페이지.<br>
