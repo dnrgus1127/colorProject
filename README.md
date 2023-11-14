@@ -3,6 +3,8 @@
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/2d932999-66e5-439e-b9db-768e3b7bb4da" width="49%"/>
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/f97db4e6-7b65-40ce-8066-01a0e630d516" width="49%"/>
 
+---
+
 # ColorGenerator v 1.0
 
 > 개발 시에 필요한 색상을 편하게 찾을 수 있게 도와주는 웹 페이지. <br/> 개발 기간 : 2023.09.19 ~ 2023.10.29
@@ -11,6 +13,9 @@
 
 - 프로젝트들을 진행하면서 디자인에 맞는 색상을 찾는게 귀찮을 때가 있어서 색상을 찾는데 도움이 되기 위함
 - 바닐라 자바스크립트 (이벤트, 프로토타입, 클래스, 모듈, DOM API 등)을 깊게 학습하면서 기본에 대한 이해도를 높이기 위한 프로젝트
+
+---
+
 # Stacks
 
 ## Environment
@@ -28,6 +33,9 @@
 
 <img src="https://img.shields.io/badge/javscript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
 
+
+---
+
 # 디렉터리 구조
 
 ```
@@ -43,10 +51,11 @@
 |  ├─ utils
 └── script.js // 진입 JS
 ```
+---
 
-## GUIDE
+# GUIDE
 
-## 개발 일지 (간략)
+# 개발 일지 (간략)
 
 ### 9월19일 ~ 9월 말
 
