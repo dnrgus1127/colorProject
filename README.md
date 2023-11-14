@@ -3,6 +3,7 @@
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/2d932999-66e5-439e-b9db-768e3b7bb4da" width="49%"/>
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/f97db4e6-7b65-40ce-8066-01a0e630d516" width="49%"/>
 
+![image](https://github.com/dnrgus1127/colorProject/assets/65962363/13a608af-a4e0-4301-8199-641b0b846b5e)
 
 # ColorGenerator v 1.0
 
@@ -25,8 +26,7 @@
 
 <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
 <img src="https://img.shields.io/badge/babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=white">
-<img src="https://img.shields.io/ba![Snipaste_2023-10-31_14-38-07](https://github.com/dnrgus1127/colorProject/assets/65962363/12405190-d428-4dff-b9c3-138acfd71eef)
-dge/webpack-8DD6F9?style=for-the-badge&logo=npm&logoColor=white">
+
 
 ## Language
 
