@@ -38,7 +38,7 @@
 
 # 디렉터리 구조
 
-```
+```dir
 ├── css
 ├── dist // After 트랜스파일링
 ├── node_modules
