@@ -68,7 +68,7 @@
 
 ### 10월 8일 ~ 10월 19일
 
--바닐라 JS 웹 컴포넌트, 가상 DOM 구현 시도 => virtiul DOM 업데이트 부분에서 막힘. 롤백 (component, virtualDOM 브랜치)
+- 바닐라 JS 웹 컴포넌트, 가상 DOM 구현 시도 => virtiul DOM 업데이트 부분에서 막힘. 롤백 (component, virtualDOM 브랜치)
 
 ### 10월 20일 ~ 10월 28일
 
