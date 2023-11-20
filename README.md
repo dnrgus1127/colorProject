@@ -1,4 +1,4 @@
-# ColorGenerator (색상 생성 프로그램)
+# 색상 추천 사이트
 
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/2d932999-66e5-439e-b9db-768e3b7bb4da" width="49%"/>
 <img src="https://github.com/dnrgus1127/colorProject/assets/65962363/f97db4e6-7b65-40ce-8066-01a0e630d516" width="49%"/>
